@@ -58,12 +58,11 @@ public class AdminPage extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
         createBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
         suspendBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -258,22 +257,17 @@ public class AdminPage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
         getContentPane().add(jPanel3, gridBagConstraints);
 
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(294, 100));
-        jPanel5.setLayout(new java.awt.GridBagLayout());
+        jPanel4.setLayout(new java.awt.GridBagLayout());
 
         createBtn.setText("CREATE");
+        createBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
         createBtn.setPreferredSize(new java.awt.Dimension(98, 23));
         createBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 create(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 6);
-        jPanel5.add(createBtn, gridBagConstraints);
+        jPanel4.add(createBtn, new java.awt.GridBagConstraints());
 
         updateBtn.setText("UPDATE");
         updateBtn.setPreferredSize(new java.awt.Dimension(98, 23));
@@ -285,7 +279,7 @@ public class AdminPage extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.insets = new java.awt.Insets(3, 6, 3, 6);
-        jPanel5.add(updateBtn, gridBagConstraints);
+        jPanel4.add(updateBtn, gridBagConstraints);
 
         suspendBtn.setText("SUSPEND");
         suspendBtn.setPreferredSize(new java.awt.Dimension(98, 23));
@@ -296,7 +290,7 @@ public class AdminPage extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(3, 6, 3, 0);
-        jPanel5.add(suspendBtn, gridBagConstraints);
+        jPanel4.add(suspendBtn, gridBagConstraints);
 
         logoutBtn.setText("LOGOUT");
         logoutBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -312,9 +306,7 @@ public class AdminPage extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
-        jPanel5.add(logoutBtn, gridBagConstraints);
-
-        jPanel4.add(jPanel5);
+        jPanel4.add(logoutBtn, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -325,22 +317,22 @@ public class AdminPage extends javax.swing.JFrame {
 
         jLabel8.setText("jLabel8");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jLabel8)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jLabel8)
                     .addGap(0, 0, Short.MAX_VALUE)))
@@ -349,7 +341,7 @@ public class AdminPage extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        getContentPane().add(jPanel6, gridBagConstraints);
+        getContentPane().add(jPanel5, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -564,7 +556,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
     private javax.swing.JTextField lname;
