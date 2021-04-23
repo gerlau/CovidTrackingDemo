@@ -16,24 +16,24 @@ public class HealthOrganization extends User {
 
     public HealthOrganization() {}
 
-    public void create(String username, String password, String privilege, String fname, String lname, String email) throws IOException {
+    public void create(String username, String password, String privilege, String fname, String lname) throws IOException {
                 
         DemoDatabase db = new DemoDatabase();
         
-        db.insert(username, password, privilege, fname, lname, email);
+        db.insert(username, password, privilege, fname, lname);
     }    
     
-    public void update(String username, String password, String privilege, String fname, String lname, String email) throws IOException {
+    public void update(String username, String password, String privilege, String fname, String lname) throws IOException {
                 
         DemoDatabase db = new DemoDatabase();
         
-        db.update(username, password, privilege, fname, lname, email);
+        db.update(username, password, privilege, fname, lname);
     }
     
-    public void suspend(String username, String password, String privilege, String fname, String lname, String email) throws IOException {
+    public void suspend(String username, String password, String privilege, String fname, String lname) throws IOException {
     
         DemoDatabase db = new DemoDatabase();
         
-        db.update(username, password, privilege, fname, lname, email);
+        db.update(username, password, privilege, fname, lname);
     }
 }

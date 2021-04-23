@@ -16,10 +16,10 @@ public class SuspendController {
 
     public SuspendController() {}
 
-    public void suspend(String username, String password, String privilege, String fname, String lname, String email) throws IOException {
+    public void suspend(String username, String password, String privilege, String fname, String lname) throws IOException {
 
         HealthOrganization ho = new HealthOrganization();
 
-        ho.suspend(username, password, privilege, fname, lname, email);
+        ho.suspend(username, password, privilege, fname, lname);
     }        
 }

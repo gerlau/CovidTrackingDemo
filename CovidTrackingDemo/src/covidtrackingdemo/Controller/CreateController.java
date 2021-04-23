@@ -16,10 +16,10 @@ public class CreateController {
     
     public CreateController() {}
 
-    public void create(String username, String password, String privilege, String fname, String lname, String email) throws IOException {
+    public void create(String username, String password, String privilege, String fname, String lname) throws IOException {
 
             HealthOrganization ho = new HealthOrganization();
             
-            ho.create(username, password, privilege, fname, lname, email);
+            ho.create(username, password, privilege, fname, lname);
     }
 }

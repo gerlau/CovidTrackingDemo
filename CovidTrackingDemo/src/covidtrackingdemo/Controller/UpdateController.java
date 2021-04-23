@@ -16,10 +16,10 @@ public class UpdateController {
     
     public UpdateController() {}
 
-    public void update(String username, String password, String privilege, String fname, String lname, String email) throws IOException {
+    public void update(String username, String password, String privilege, String fname, String lname) throws IOException {
 
         HealthOrganization ho = new HealthOrganization();
 
-        ho.update(username, password, privilege, fname, lname, email);
+        ho.update(username, password, privilege, fname, lname);
     }    
 }

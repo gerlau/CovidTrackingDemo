@@ -10,6 +10,7 @@ import covidtrackingdemo.Controller.SuspendController;
 import covidtrackingdemo.Controller.UpdateController;
 import covidtrackingdemo.DemoDatabase;
 import covidtrackingdemo.Entity.User;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -46,13 +47,11 @@ public class AdminPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         password = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
         lname = new javax.swing.JTextField();
-        email = new javax.swing.JTextField();
         privilege = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -66,10 +65,13 @@ public class AdminPage extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setMinimumSize(new java.awt.Dimension(127, 400));
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 102));
-        jPanel1.setPreferredSize(new java.awt.Dimension(120, 90));
+        jPanel1.setPreferredSize(new java.awt.Dimension(120, 120));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -82,15 +84,17 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 125, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -98,104 +102,103 @@ public class AdminPage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         getContentPane().add(jPanel1, gridBagConstraints);
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(312, 200));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Username");
-        jLabel1.setPreferredSize(new java.awt.Dimension(100, 14));
+        jLabel1.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 15);
         jPanel2.add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("Password");
-        jLabel2.setPreferredSize(new java.awt.Dimension(100, 14));
+        jLabel2.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 15);
         jPanel2.add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("First Name");
-        jLabel3.setPreferredSize(new java.awt.Dimension(100, 14));
+        jLabel3.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 15);
         jPanel2.add(jLabel3, gridBagConstraints);
 
         jLabel4.setText("Last Name");
-        jLabel4.setPreferredSize(new java.awt.Dimension(100, 14));
+        jLabel4.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 15);
         jPanel2.add(jLabel4, gridBagConstraints);
 
-        jLabel5.setText("Email");
-        jLabel5.setPreferredSize(new java.awt.Dimension(100, 14));
+        jLabel6.setText("Privilege");
+        jLabel6.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel2.add(jLabel5, gridBagConstraints);
-
-        jLabel6.setText("Privilege");
-        jLabel6.setPreferredSize(new java.awt.Dimension(100, 14));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 15);
         jPanel2.add(jLabel6, gridBagConstraints);
+
+        username.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 257;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel2.add(username, gridBagConstraints);
+
+        password.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 257;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel2.add(password, gridBagConstraints);
+
+        fname.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 257;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel2.add(fname, gridBagConstraints);
+
+        lname.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 257;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel2.add(lname, gridBagConstraints);
+
+        privilege.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Public User", "Business Owner", "Health Staff", "Admin" }));
+        privilege.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 257;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel2.add(email, gridBagConstraints);
-
-        privilege.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Public User", "Business Owner", "Health Staff", "Admin" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 234;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel2.add(privilege, gridBagConstraints);
@@ -215,11 +218,11 @@ public class AdminPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Username", "Password", "Privilege", "Fname", "Lname", "Email"
+                "Username", "Password", "Privilege", "Fname", "Lname"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -289,7 +292,7 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(3, 6, 3, 0);
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 3, 0);
         jPanel4.add(suspendBtn, gridBagConstraints);
 
         logoutBtn.setText("LOGOUT");
@@ -359,7 +362,7 @@ public class AdminPage extends javax.swing.JFrame {
                 CreateController cc = new CreateController();
         
                 try {
-                    cc.create(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText(), email.getText());
+                    cc.create(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
 
                     DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
@@ -390,7 +393,7 @@ public class AdminPage extends javax.swing.JFrame {
                 UpdateController uc = new UpdateController();
         
                 try {
-                    uc.update(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText(), email.getText());
+                    uc.update(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
 
                     DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
@@ -421,7 +424,7 @@ public class AdminPage extends javax.swing.JFrame {
                 SuspendController sc = new SuspendController();
                 
                 try {
-                    sc.suspend(username.getText(), "admin", (String)privilege.getSelectedItem(), fname.getText(), lname.getText(), email.getText());
+                    sc.suspend(username.getText(), "admin", (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
                     
                     DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             
@@ -466,7 +469,6 @@ public class AdminPage extends javax.swing.JFrame {
 
         fname.setText(model.getValueAt(i, 3).toString());
         lname.setText(model.getValueAt(i, 4).toString());
-        email.setText(model.getValueAt(i, 5).toString());
     }//GEN-LAST:event_jTableMouseClicked
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
@@ -485,7 +487,7 @@ public class AdminPage extends javax.swing.JFrame {
         
         ArrayList<User> userList = db.select();
         
-        Object rowData[] = new Object[6];
+        Object rowData[] = new Object[5];
         
         for (User user : userList) {
             
@@ -494,7 +496,6 @@ public class AdminPage extends javax.swing.JFrame {
             rowData[2] = user.getPrivilege();
             rowData[3] = user.getFirstName();
             rowData[4] = user.getLastName();
-            rowData[5] = user.getEmail();
             
             model.addRow(rowData);
         }
@@ -541,13 +542,11 @@ public class AdminPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createBtn;
-    private javax.swing.JTextField email;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

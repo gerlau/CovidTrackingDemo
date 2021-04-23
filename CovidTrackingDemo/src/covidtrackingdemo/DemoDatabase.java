@@ -32,13 +32,13 @@ public class DemoDatabase {
     }
     
     // Insert 
-    public void insert(String username, String password, String privilege, String fname, String lname, String email) throws FileNotFoundException, IOException {
+    public void insert(String username, String password, String privilege, String fname, String lname) throws FileNotFoundException, IOException {
         
         // Insert validations here
         
         try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path, true))) {
             
-            String row = username + "," + password + "," + privilege + "," + fname + "," + lname + "," + email;
+            String row = username + "," + password + "," + privilege + "," + fname + "," + lname;
             
             csvWriter.newLine();
             
@@ -49,7 +49,7 @@ public class DemoDatabase {
     }
     
     // Update
-    public void update(String username, String password, String privilege, String fname, String lname, String email) throws FileNotFoundException, IOException {
+    public void update(String username, String password, String privilege, String fname, String lname) throws FileNotFoundException, IOException {
         
         String newData = "";
     
@@ -65,7 +65,7 @@ public class DemoDatabase {
                 
                 if (username.equals(data[0])) {
                 
-                    row = username + "," + password + "," + privilege + "," + fname + "," + lname + "," + email;
+                    row = username + "," + password + "," + privilege + "," + fname + "," + lname;
                 }
 
                 newData = newData + "\n" + row;
@@ -107,7 +107,6 @@ public class DemoDatabase {
                     user.setPrivilege(data[2]); 
                     user.setFirstName(data[3]); 
                     user.setLastName(data[4]);
-                    user.setEmail(data[5]); 
                     
                     return user;
                 } 
@@ -142,7 +141,6 @@ public class DemoDatabase {
                 user.setPrivilege(data[2]);
                 user.setFirstName(data[3]);
                 user.setLastName(data[4]);
-                user.setEmail(data[5]);
                 
                 userList.add(user);
             }
