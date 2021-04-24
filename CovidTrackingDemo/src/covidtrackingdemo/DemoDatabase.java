@@ -28,7 +28,7 @@ public class DemoDatabase {
     
     public DemoDatabase() {
        
-        path = "C:\\Users\\User\\Downloads\\covid_dataset.xlsx - covid_dataset.csv";
+        path = "dataset\\covid_dataset.xlsx - covid_dataset.csv";
     }
     
     // Insert 
