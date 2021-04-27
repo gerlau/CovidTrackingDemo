@@ -18,14 +18,14 @@ public class CreateController {
 
     public int create(String username, String password, String privilege, String firstName, String lastName) throws IOException {
 
-            HealthOrganization ho = new HealthOrganization();
-            
-            int validationIsSuccessful = validate(username, password, privilege, firstName, lastName);
+        HealthOrganization ho = new HealthOrganization();
 
-            if (validationIsSuccessful == 0)
-                ho.create(username, password, privilege, firstName, lastName);
-            
-            return validationIsSuccessful;
+        int validationIsSuccessful = validate(username, password, privilege, firstName, lastName);
+
+        if (validationIsSuccessful == 0)
+            ho.create(username, password, privilege, firstName, lastName);
+
+        return validationIsSuccessful;
     }
     
     private int validate(String username, String password, String privilege, String firstName, String lastName) throws IOException {
