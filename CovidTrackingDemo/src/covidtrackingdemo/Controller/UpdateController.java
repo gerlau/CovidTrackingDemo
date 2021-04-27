@@ -16,10 +16,38 @@ public class UpdateController {
     
     public UpdateController() {}
 
-    public void update(String username, String password, String privilege, String firstName, String lastName) throws IOException {
+    public int update(String username, String password, String privilege, String firstName, String lastName) throws IOException {
 
         HealthOrganization ho = new HealthOrganization();
 
-        ho.update(username, password, privilege, firstName, lastName);
+        int validationIsSuccessful = validate(username, password, privilege, firstName, lastName);
+
+        if (validationIsSuccessful == 0)
+            ho.update(username, password, privilege, firstName, lastName);
+        
+        return validationIsSuccessful;
     }    
+    
+    private int validate(String username, String password, String privilege, String firstName, String lastName) throws IOException {
+
+        String regex_password = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$";
+
+        //Validate empty fields
+        if (username.equals("") || password.equals("") || firstName.equals("") || lastName.equals("")) {
+            return 1; 
+        }
+
+        //Validate email
+        else if (!username.contains("@")) {
+            return 2;
+        }
+
+        //Validate password
+        else if (!password.matches(regex_password)) {
+            return 3;
+        }
+        
+        else 
+            return 0;
+    }
 }
