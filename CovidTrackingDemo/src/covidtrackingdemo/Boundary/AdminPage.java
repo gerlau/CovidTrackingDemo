@@ -362,16 +362,31 @@ public class AdminPage extends javax.swing.JFrame {
                 CreateController cc = new CreateController();
         
                 try {
-                    cc.create(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                    int validationIsSuccessful = cc.create(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                    
+                    if (validationIsSuccessful == 0) {
 
-                    DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+                        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-                    model.setRowCount(0);
+                        model.setRowCount(0);
 
-                    displayData();
+                        displayData();
 
-                    // Clear content
-
+                        // Clear content
+                    }
+                    
+                    else if (validationIsSuccessful == 1) {
+                            JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                    }
+                    
+                    else if (validationIsSuccessful == 2) {
+                            JOptionPane.showMessageDialog(null, "Please enter a valid username");
+                    }
+                    
+                    else if (validationIsSuccessful == 3) {
+                            JOptionPane.showMessageDialog(null, "Please enter a stronger password");   
+                    }
+                
                 } catch (IOException ex) {
                     Logger.getLogger(AdminPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
