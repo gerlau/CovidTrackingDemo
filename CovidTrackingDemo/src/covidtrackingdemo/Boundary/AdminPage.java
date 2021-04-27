@@ -362,15 +362,20 @@ public class AdminPage extends javax.swing.JFrame {
                 CreateController cc = new CreateController();
         
                 try {
-                    cc.create(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                    boolean validationIsSuccessful = cc.validate(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                                        
+                    if (validationIsSuccessful) {
 
-                    DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+                        cc.create(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
 
-                    model.setRowCount(0);
+                        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-                    displayData();
+                        model.setRowCount(0);
 
-                    // Clear content
+                        displayData();
+
+                        // Clear content
+                    }
 
                 } catch (IOException ex) {
                     Logger.getLogger(AdminPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -393,15 +398,19 @@ public class AdminPage extends javax.swing.JFrame {
                 UpdateController uc = new UpdateController();
         
                 try {
-                    uc.update(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                    boolean validationIsSuccessful = uc.validate(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                                        
+                    if (validationIsSuccessful) {
+                        uc.update(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
 
-                    DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+                        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-                    model.setRowCount(0);
+                        model.setRowCount(0);
 
-                    displayData();
+                        displayData();
 
-                    // Clear content
+                        // Clear content
+                    }
 
                 } catch (IOException ex) {
                     Logger.getLogger(AdminPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -424,15 +433,20 @@ public class AdminPage extends javax.swing.JFrame {
                 SuspendController sc = new SuspendController();
                 
                 try {
-                    sc.suspend(username.getText(), "admin", (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                    boolean validationIsSuccessful = sc.validate(username.getText(), password.getText(), (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+                                        
+                    if (validationIsSuccessful) {
+                        sc.suspend(username.getText(), "admin", (String)privilege.getSelectedItem(), fname.getText(), lname.getText());
+
+                        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+
+                        model.setRowCount(0);
+
+                        displayData();
+
+                        // Clear content
+                    }
                     
-                    DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-            
-                    model.setRowCount(0);
-
-                    displayData();
-
-                    // Clear content
                 } catch (IOException ex) {
                     Logger.getLogger(AdminPage.class.getName()).log(Level.SEVERE, null, ex);
                 }

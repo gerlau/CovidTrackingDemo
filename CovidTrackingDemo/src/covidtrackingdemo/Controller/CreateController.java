@@ -22,4 +22,13 @@ public class CreateController {
             
             ho.create(username, password, privilege, firstName, lastName);
     }
+    
+    public boolean validate(String username, String password, String privilege, String firstName, String lastName) throws IOException {
+
+        HealthOrganization ho = new HealthOrganization();
+
+        boolean validationIsSuccessful = ho.validate(username, password, privilege, firstName, lastName);
+
+        return validationIsSuccessful;
+    }
 }
