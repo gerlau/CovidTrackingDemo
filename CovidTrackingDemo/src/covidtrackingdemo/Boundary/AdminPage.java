@@ -300,7 +300,7 @@ public class AdminPage extends javax.swing.JFrame {
         logoutBtn.setPreferredSize(new java.awt.Dimension(252, 23));
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutBtnActionPerformed(evt);
+                logout(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -471,13 +471,13 @@ public class AdminPage extends javax.swing.JFrame {
         lname.setText(model.getValueAt(i, 4).toString());
     }//GEN-LAST:event_jTableMouseClicked
 
-    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+    private void logout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout
         // TODO add your handling code here:
         dispose();
         
         LoginPage lp = new LoginPage();
         lp.setVisible(true);
-    }//GEN-LAST:event_logoutBtnActionPerformed
+    }//GEN-LAST:event_logout
     
     private void displayData() throws IOException {
         
