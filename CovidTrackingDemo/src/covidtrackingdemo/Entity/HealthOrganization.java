@@ -7,6 +7,7 @@ package covidtrackingdemo.Entity;
 
 import covidtrackingdemo.DemoDatabase;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,5 +36,14 @@ public class HealthOrganization extends User {
         DemoDatabase db = new DemoDatabase();
         
         db.update(username, password, privilege, firstName, lastName);
+    }
+    
+    public ArrayList<User> display() throws IOException {
+    
+        DemoDatabase db = new DemoDatabase();
+        
+        ArrayList<User> userList = db.select();
+        
+        return userList;
     }
 }
