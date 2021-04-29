@@ -6,9 +6,7 @@
 
 package covidtrackingdemo.Boundary;
 
-import covidtrackingdemo.Controller.LoginController;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import covidtrackingdemo.Controller.HealthOrganization.LoginController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

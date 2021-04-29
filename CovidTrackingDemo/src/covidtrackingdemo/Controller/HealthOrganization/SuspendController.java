@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package covidtrackingdemo.Controller;
+package covidtrackingdemo.Controller.HealthOrganization;
 
 import covidtrackingdemo.Entity.HealthOrganization;
 import java.io.IOException;
@@ -29,8 +29,6 @@ public class SuspendController {
     }        
     
     private int validate(String username) throws IOException {
-
-        String regex_password = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,}$";
 
         //Validate empty fields
         if (username.equals("")) {

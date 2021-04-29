@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package covidtrackingdemo.Controller;
+package covidtrackingdemo.Controller.HealthOrganization;
 
 import covidtrackingdemo.Entity.HealthOrganization;
 import java.io.IOException;
@@ -12,21 +12,21 @@ import java.io.IOException;
  *
  * @author barry
  */
-public class UpdateController {
+public class CreateController {
     
-    public UpdateController() {}
+    public CreateController() {}
 
-    public int update(String username, String password, String privilege, String firstName, String lastName) throws IOException {
+    public int create(String username, String password, String privilege, String firstName, String lastName) throws IOException {
 
         HealthOrganization ho = new HealthOrganization();
 
         int validationIsSuccessful = validate(username, password, privilege, firstName, lastName);
 
         if (validationIsSuccessful == 0)
-            ho.update(username, password, privilege, firstName, lastName);
-        
+            ho.create(username, password, privilege, firstName, lastName);
+
         return validationIsSuccessful;
-    }    
+    }
     
     private int validate(String username, String password, String privilege, String firstName, String lastName) throws IOException {
 

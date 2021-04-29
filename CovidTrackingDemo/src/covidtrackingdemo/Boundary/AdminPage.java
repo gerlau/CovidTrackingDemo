@@ -5,9 +5,10 @@
  */
 package covidtrackingdemo.Boundary;
 
-import covidtrackingdemo.Controller.CreateController;
-import covidtrackingdemo.Controller.SuspendController;
-import covidtrackingdemo.Controller.UpdateController;
+import covidtrackingdemo.Controller.HealthOrganization.CreateController;
+import covidtrackingdemo.Controller.HealthOrganization.DisplayController;
+import covidtrackingdemo.Controller.HealthOrganization.SuspendController;
+import covidtrackingdemo.Controller.HealthOrganization.UpdateController;
 import covidtrackingdemo.DemoDatabase;
 import covidtrackingdemo.Entity.User;
 import java.awt.Dimension;
@@ -27,7 +28,7 @@ public class AdminPage extends javax.swing.JFrame {
     public AdminPage() throws IOException {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-        displayData(); 
+        display(); 
     }
 
     /**
@@ -370,7 +371,7 @@ public class AdminPage extends javax.swing.JFrame {
 
                         model.setRowCount(0);
 
-                        displayData();
+                        display();
 
                         // Clear content
                     }
@@ -416,7 +417,7 @@ public class AdminPage extends javax.swing.JFrame {
 
                         model.setRowCount(0);
 
-                        displayData();
+                        display();
 
                         // Clear content
                     }
@@ -462,7 +463,7 @@ public class AdminPage extends javax.swing.JFrame {
 
                         model.setRowCount(0);
 
-                        displayData();
+                        display();
 
                         // Clear content
                     }
@@ -517,13 +518,13 @@ public class AdminPage extends javax.swing.JFrame {
         lp.setVisible(true);
     }//GEN-LAST:event_logout
     
-    private void displayData() throws IOException {
+    private void display() throws IOException {
         
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         
-        DemoDatabase db = new DemoDatabase();
-        
-        ArrayList<User> userList = db.select();
+        DisplayController dc = new DisplayController();
+       
+        ArrayList<User> userList = dc.display();
         
         Object rowData[] = new Object[5];
         
