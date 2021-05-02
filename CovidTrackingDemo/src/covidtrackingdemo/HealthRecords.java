@@ -16,36 +16,19 @@ import java.util.ArrayList;
 
 /**
  *
- * @author User
+ * @author barry
  */
-public class DemoDatabase {
-     
+public class HealthRecords {
+    
     final String path; 
-    
-    public DemoDatabase() {
+
+    public HealthRecords() {
        
-        path = "dataset\\UserProfiles.csv";
+        path = "dataset\\HealthRecordsReal.csv";
     }
-    
-    // Insert 
-    public void insert(String username, String password, String privilege, String fname, String lname) throws FileNotFoundException, IOException {
         
-        // Insert validations here
-        
-        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path, true))) {
-            
-            String row = username + "," + password + "," + privilege + "," + fname + "," + lname;
-            
-            csvWriter.newLine();
-            
-            csvWriter.write(row);
-            
-            csvWriter.close();
-        }
-    }
-    
     // Update
-    public void update(String username, String password, String privilege, String fname, String lname) throws FileNotFoundException, IOException {
+    public void update(String username, String vaccinatedBy, String vaccinationStatus, String vaccinatedDate, String determinedBy, String infectionStatus, String infectedDate) throws FileNotFoundException, IOException {
         
         String newData = "";
     
@@ -61,7 +44,7 @@ public class DemoDatabase {
                 
                 if (username.equals(data[0])) {
                 
-                    row = username + "," + password + "," + privilege + "," + fname + "," + lname;
+                    row = username + "," + vaccinatedBy + "," + vaccinationStatus + "," + vaccinatedDate + "," + determinedBy + "," + infectionStatus + "," + infectedDate;
                 }
 
                 newData = newData + "\n" + row;
@@ -78,11 +61,8 @@ public class DemoDatabase {
         }
     }
    
-    // Delete
-    public void delete() {}
-    
     // Select - individual
-    public User select(String username, String password) throws IOException {
+    public User select(String username) throws IOException {
         
         try (BufferedReader csvReader = new BufferedReader(new FileReader(path))) {
             
@@ -94,15 +74,17 @@ public class DemoDatabase {
                 
                 String[] data = row.split(",");
                 
-                if (username.equals(data[0]) && password.equals(data[1])){
+                if (username.equals(data[0])){// && password.equals(data[1])){
                     
                     User user = new User();
                     
                     user.setUsername(data[0]);
-                    user.setPassword(data[1]);
-                    user.setPrivilege(data[2]); 
-                    user.setFirstName(data[3]); 
-                    user.setLastName(data[4]);
+                    user.setVaccinatedBy(data[1]);
+                    user.setVaccinationStatus(data[2]); 
+                    user.setVaccinatedDate(data[3]); 
+                    user.setDeterminedBy(data[4]);
+                    user.setInfectionStatus(data[5]);
+                    user.setInfectedDate(data[6]);
                     
                     return user;
                 } 
@@ -133,10 +115,12 @@ public class DemoDatabase {
                 User user = new User();
                 
                 user.setUsername(data[0]);
-                user.setPassword(data[1]);
-                user.setPrivilege(data[2]);
-                user.setFirstName(data[3]);
-                user.setLastName(data[4]);
+                user.setVaccinatedBy(data[1]);
+                user.setVaccinationStatus(data[2]); 
+                user.setVaccinatedDate(data[3]); 
+                user.setDeterminedBy(data[4]);
+                user.setInfectionStatus(data[5]);
+                user.setInfectedDate(data[6]);
                 
                 userList.add(user);
             }
@@ -147,3 +131,5 @@ public class DemoDatabase {
         return userList; 
     }
 }
+
+

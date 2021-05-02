@@ -5,6 +5,11 @@
  */
 package covidtrackingdemo.Entity;
 
+import covidtrackingdemo.DemoDatabase;
+import covidtrackingdemo.HealthRecords;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author User
@@ -17,5 +22,12 @@ public class HealthStaff extends User {
     
     public void update() {}
     
-    public void display() {}
+    public ArrayList<User> display() throws IOException {
+        
+        HealthRecords hr = new HealthRecords();
+        
+        ArrayList<User> userList = hr.select();
+        
+        return userList;
+    }
 }

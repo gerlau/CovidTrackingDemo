@@ -5,9 +5,13 @@
  */
 package covidtrackingdemo.Boundary;
 
+import covidtrackingdemo.Controller.HealthStaff.DisplayController;
+import covidtrackingdemo.Entity.User;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -267,14 +271,13 @@ public class HealthStaffPage extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable.setPreferredSize(new java.awt.Dimension(525, 0));
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMouseClicked(evt);
@@ -383,7 +386,29 @@ public class HealthStaffPage extends javax.swing.JFrame {
         lp.setVisible(true);
     }//GEN-LAST:event_logout
     
-    private void display() throws IOException {}
+    private void display() throws IOException {
+
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        
+        DisplayController dc = new DisplayController();
+       
+        ArrayList<User> userList = dc.display();
+        
+        Object rowData[] = new Object[7];
+        
+        for (User user : userList) {
+            
+            rowData[0] = user.getUsername();
+            rowData[1] = user.getVaccinatedBy();
+            rowData[2] = user.getVaccinationStatus();
+            rowData[3] = user.getVaccinatedDate();
+            rowData[4] = user.getDeterminedBy();
+            rowData[5] = user.getInfectionStatus();
+            rowData[6] = user.getInfectedDate();
+            
+            model.addRow(rowData);
+        }
+    }
 
     /**
      * @param args the command line arguments
