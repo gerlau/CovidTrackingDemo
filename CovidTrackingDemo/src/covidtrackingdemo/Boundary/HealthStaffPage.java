@@ -14,12 +14,6 @@ import java.util.logging.Logger;
 
 import javax.swing.table.DefaultTableModel;
 
-import javax.swing.table.DefaultTableModel;
-
-import javax.swing.table.DefaultTableModel;
-
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author barry
@@ -278,14 +272,13 @@ public class HealthStaffPage extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable.setPreferredSize(new java.awt.Dimension(525, 0));
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMouseClicked(evt);
@@ -405,7 +398,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
         Object rowData[] = new Object[7];
         
         for (PublicUser user : userList) {
-            
+                        
             rowData[0] = user.getUsername();
             rowData[1] = user.getVaccinatedBy();
             rowData[2] = user.getVaccinationStatus();

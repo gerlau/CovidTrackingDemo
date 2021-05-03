@@ -5,10 +5,8 @@
  */
 package covidtrackingdemo.Controller.HealthStaff;
 
-import covidtrackingdemo.Entity.HealthOrganization;
 import covidtrackingdemo.Entity.HealthStaff;
 import covidtrackingdemo.Entity.PublicUser;
-import covidtrackingdemo.Entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
 
