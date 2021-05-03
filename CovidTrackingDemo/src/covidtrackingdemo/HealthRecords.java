@@ -25,7 +25,7 @@ public class HealthRecords {
 
     public HealthRecords() {
        
-        path = "dataset\\HealthRecordsReal.csv";
+        path = "dataset\\HealthRecords.csv";
     }
         
     // Update

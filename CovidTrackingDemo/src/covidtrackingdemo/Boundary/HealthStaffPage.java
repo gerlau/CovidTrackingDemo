@@ -5,15 +5,20 @@
  */
 package covidtrackingdemo.Boundary;
 
-<<<<<<< Updated upstream
-=======
 import covidtrackingdemo.Controller.HealthStaff.DisplayController;
 import covidtrackingdemo.Entity.PublicUser;
-import covidtrackingdemo.Entity.User;
->>>>>>> Stashed changes
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.table.DefaultTableModel;
+
+import javax.swing.table.DefaultTableModel;
+
+import javax.swing.table.DefaultTableModel;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -389,9 +394,6 @@ public class HealthStaffPage extends javax.swing.JFrame {
         lp.setVisible(true);
     }//GEN-LAST:event_logout
     
-<<<<<<< Updated upstream
-    private void display() throws IOException {}
-=======
     private void display() throws IOException {
 
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -415,7 +417,6 @@ public class HealthStaffPage extends javax.swing.JFrame {
             model.addRow(rowData);
         }
     }
->>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments

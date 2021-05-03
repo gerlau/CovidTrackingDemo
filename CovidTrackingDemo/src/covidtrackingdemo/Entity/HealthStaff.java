@@ -5,6 +5,10 @@
  */
 package covidtrackingdemo.Entity;
 
+import covidtrackingdemo.HealthRecords;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author User
@@ -17,9 +21,6 @@ public class HealthStaff extends User {
     
     public void update() {}
     
-<<<<<<< Updated upstream
-    public void display() {}
-=======
     public ArrayList<PublicUser> display() throws IOException {
         
         HealthRecords hr = new HealthRecords();
@@ -28,5 +29,4 @@ public class HealthStaff extends User {
         
         return userList;
     }
->>>>>>> Stashed changes
 }
