@@ -5,6 +5,12 @@
  */
 package covidtrackingdemo.Boundary;
 
+<<<<<<< Updated upstream
+=======
+import covidtrackingdemo.Controller.HealthStaff.DisplayController;
+import covidtrackingdemo.Entity.PublicUser;
+import covidtrackingdemo.Entity.User;
+>>>>>>> Stashed changes
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -383,7 +389,33 @@ public class HealthStaffPage extends javax.swing.JFrame {
         lp.setVisible(true);
     }//GEN-LAST:event_logout
     
+<<<<<<< Updated upstream
     private void display() throws IOException {}
+=======
+    private void display() throws IOException {
+
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        
+        DisplayController dc = new DisplayController();
+       
+        ArrayList<PublicUser> userList = dc.display();
+        
+        Object rowData[] = new Object[7];
+        
+        for (PublicUser user : userList) {
+            
+            rowData[0] = user.getUsername();
+            rowData[1] = user.getVaccinatedBy();
+            rowData[2] = user.getVaccinationStatus();
+            rowData[3] = user.getVaccinatedDate();
+            rowData[4] = user.getDeterminedBy();
+            rowData[5] = user.getInfectionStatus();
+            rowData[6] = user.getInfectedDate();
+            
+            model.addRow(rowData);
+        }
+    }
+>>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments

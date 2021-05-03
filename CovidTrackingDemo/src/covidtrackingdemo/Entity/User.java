@@ -29,13 +29,22 @@ public class User {
     public String getPrivilege() { return privilege; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
+<<<<<<< Updated upstream
     
+=======
+   
+>>>>>>> Stashed changes
     // Mutator Methods
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { this.password = password; } 
     public void setPrivilege(String privilege) { this.privilege = privilege; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
+<<<<<<< Updated upstream
+=======
+         
+
+>>>>>>> Stashed changes
     
     public String login(String username, String password) throws FileNotFoundException, IOException {
                 

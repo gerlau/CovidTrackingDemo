@@ -17,5 +17,16 @@ public class HealthStaff extends User {
     
     public void update() {}
     
+<<<<<<< Updated upstream
     public void display() {}
+=======
+    public ArrayList<PublicUser> display() throws IOException {
+        
+        HealthRecords hr = new HealthRecords();
+        
+        ArrayList<PublicUser> userList = hr.select();
+        
+        return userList;
+    }
+>>>>>>> Stashed changes
 }
