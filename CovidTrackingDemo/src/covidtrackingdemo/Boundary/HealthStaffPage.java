@@ -8,6 +8,8 @@ package covidtrackingdemo.Boundary;
 import covidtrackingdemo.Controller.HealthStaff.DisplayController;
 import covidtrackingdemo.Entity.PublicUser;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,15 +48,15 @@ public class HealthStaffPage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        hs_username = new javax.swing.JTextField();
-        pu_username = new javax.swing.JTextField();
+        hsUsername = new javax.swing.JTextField();
+        puUsername = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         infectionDate = new com.toedter.calendar.JDateChooser();
         vaccinationDate = new com.toedter.calendar.JDateChooser();
-        istatsYesBtn = new javax.swing.JRadioButton();
-        istatsNoBtn = new javax.swing.JRadioButton();
-        vstatsYesBtn = new javax.swing.JRadioButton();
-        vstatsNoBtn = new javax.swing.JRadioButton();
+        iStatsYesBtn = new javax.swing.JRadioButton();
+        iStatsNoBtn = new javax.swing.JRadioButton();
+        vStatsYesBtn = new javax.swing.JRadioButton();
+        vStatsNoBtn = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
@@ -152,7 +154,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 15);
         jPanel2.add(jLabel6, gridBagConstraints);
 
-        hs_username.setPreferredSize(new java.awt.Dimension(100, 30));
+        hsUsername.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -160,9 +162,9 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel2.add(hs_username, gridBagConstraints);
+        jPanel2.add(hsUsername, gridBagConstraints);
 
-        pu_username.setPreferredSize(new java.awt.Dimension(100, 30));
+        puUsername.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -171,7 +173,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel2.add(pu_username, gridBagConstraints);
+        jPanel2.add(puUsername, gridBagConstraints);
 
         jLabel5.setText("Infection Date");
         jLabel5.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -193,6 +195,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel2.add(infectionDate, gridBagConstraints);
 
+        vaccinationDate.setDateFormatString("dd/MM/yyyy");
         vaccinationDate.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -204,9 +207,9 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel2.add(vaccinationDate, gridBagConstraints);
 
-        buttonGroup1.add(istatsYesBtn);
-        istatsYesBtn.setText("Yes");
-        istatsYesBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        buttonGroup1.add(iStatsYesBtn);
+        iStatsYesBtn.setText("Yes");
+        iStatsYesBtn.setPreferredSize(new java.awt.Dimension(50, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -214,12 +217,12 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel2.add(istatsYesBtn, gridBagConstraints);
+        jPanel2.add(iStatsYesBtn, gridBagConstraints);
 
-        buttonGroup1.add(istatsNoBtn);
-        istatsNoBtn.setSelected(true);
-        istatsNoBtn.setText("No");
-        istatsNoBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        buttonGroup1.add(iStatsNoBtn);
+        iStatsNoBtn.setSelected(true);
+        iStatsNoBtn.setText("No");
+        iStatsNoBtn.setPreferredSize(new java.awt.Dimension(50, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -227,11 +230,11 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel2.add(istatsNoBtn, gridBagConstraints);
+        jPanel2.add(iStatsNoBtn, gridBagConstraints);
 
-        buttonGroup2.add(vstatsYesBtn);
-        vstatsYesBtn.setText("Yes");
-        vstatsYesBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        buttonGroup2.add(vStatsYesBtn);
+        vStatsYesBtn.setText("Yes");
+        vStatsYesBtn.setPreferredSize(new java.awt.Dimension(50, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -239,19 +242,19 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel2.add(vstatsYesBtn, gridBagConstraints);
+        jPanel2.add(vStatsYesBtn, gridBagConstraints);
 
-        buttonGroup2.add(vstatsNoBtn);
-        vstatsNoBtn.setSelected(true);
-        vstatsNoBtn.setText("No");
-        vstatsNoBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        buttonGroup2.add(vStatsNoBtn);
+        vStatsNoBtn.setSelected(true);
+        vStatsNoBtn.setText("No");
+        vStatsNoBtn.setPreferredSize(new java.awt.Dimension(50, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel2.add(vstatsNoBtn, gridBagConstraints);
+        jPanel2.add(vStatsNoBtn, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -377,6 +380,67 @@ public class HealthStaffPage extends javax.swing.JFrame {
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // TODO add your handling code here:
+        int i = jTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+
+        // Set PU Username
+        puUsername.setText(model.getValueAt(i, 0).toString());
+
+        // Set Vaccine Status
+        String vStats = model.getValueAt(i,2).toString();
+        
+        switch(vStats) {
+
+            case "Y" -> {
+                vStatsYesBtn.setSelected(true);
+                vStatsNoBtn.setSelected(false);
+            }  
+            case "N" -> {
+                vStatsYesBtn.setSelected(false);
+                vStatsNoBtn.setSelected(true);
+            }
+        }
+
+        // Set Vaccine Date
+        String vaccinationDateValue = model.getValueAt(i,3).toString();
+        
+        try {
+            java.util.Date date = new SimpleDateFormat("DD/MM/YYYY").parse(vaccinationDateValue);            
+            vaccinationDate.setDate(date); 
+            vaccinationDate.setDateFormatString(vaccinationDateValue);        
+        } 
+        
+        catch (ParseException ex) {
+            Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Set Infection Status
+        String iStats = model.getValueAt(i,5).toString();
+        
+        switch(iStats) {
+
+            case "Y" -> {
+                iStatsYesBtn.setSelected(true);
+                iStatsNoBtn.setSelected(false);
+            }  
+            case "N" -> {
+                iStatsYesBtn.setSelected(false);
+                iStatsNoBtn.setSelected(true);
+            }
+        }
+        
+        // Set Infection Date
+        String infectionDateValue = model.getValueAt(i,6).toString();
+        
+        try {
+            java.util.Date date = new SimpleDateFormat("DD/MM/YYYY").parse(infectionDateValue);            
+            infectionDate.setDate(date); 
+            infectionDate.setDateFormatString(infectionDateValue);        
+        } 
+        
+        catch (ParseException ex) {
+            Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTableMouseClicked
 
     private void logout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout
@@ -453,10 +517,10 @@ public class HealthStaffPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JTextField hs_username;
+    private javax.swing.JTextField hsUsername;
+    private javax.swing.JRadioButton iStatsNoBtn;
+    private javax.swing.JRadioButton iStatsYesBtn;
     private com.toedter.calendar.JDateChooser infectionDate;
-    private javax.swing.JRadioButton istatsNoBtn;
-    private javax.swing.JRadioButton istatsYesBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -471,11 +535,15 @@ public class HealthStaffPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JTextField pu_username;
+    private javax.swing.JTextField puUsername;
     private javax.swing.JButton showUserBtn;
     private javax.swing.JButton updateBtn;
+    private javax.swing.JRadioButton vStatsNoBtn;
+    private javax.swing.JRadioButton vStatsYesBtn;
     private com.toedter.calendar.JDateChooser vaccinationDate;
-    private javax.swing.JRadioButton vstatsNoBtn;
-    private javax.swing.JRadioButton vstatsYesBtn;
     // End of variables declaration//GEN-END:variables
+
+    void setHsUsername(String username) {
+        hsUsername.setText(username);
+    }
 }

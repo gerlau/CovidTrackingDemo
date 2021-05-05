@@ -136,6 +136,7 @@ public class LoginPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Valid credentials. Health staff");
                     HealthStaffPage healthStaff = new HealthStaffPage();
                     healthStaff.setVisible(true);
+                    healthStaff.setHsUsername(username.getText());
                 }
                 default -> {
                     JOptionPane.showMessageDialog(this, "Invalid credentials.");
