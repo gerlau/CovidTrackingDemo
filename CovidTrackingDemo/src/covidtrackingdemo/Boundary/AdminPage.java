@@ -10,6 +10,7 @@ import covidtrackingdemo.Controller.HealthOrganization.DisplayController;
 import covidtrackingdemo.Controller.HealthOrganization.SuspendController;
 import covidtrackingdemo.Controller.HealthOrganization.UpdateController;
 import covidtrackingdemo.Entity.User;
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -153,6 +154,8 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel2.add(jLabel6, gridBagConstraints);
 
         username.setPreferredSize(new java.awt.Dimension(100, 30));
+        username.setEditable(false);
+        username.setBackground(new Color(224,224,224));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;

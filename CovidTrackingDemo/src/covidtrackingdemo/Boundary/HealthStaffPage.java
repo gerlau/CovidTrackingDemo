@@ -5,14 +5,20 @@
  */
 package covidtrackingdemo.Boundary;
 
+import covidtrackingdemo.Controller.HealthStaff.UpdateVacStatusCtrler;
+import covidtrackingdemo.Controller.HealthStaff.UpdateInfStatusCtrler;
 import covidtrackingdemo.Controller.HealthStaff.DisplayController;
 import covidtrackingdemo.Entity.PublicUser;
+import java.awt.Color;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -155,6 +161,8 @@ public class HealthStaffPage extends javax.swing.JFrame {
         jPanel2.add(jLabel6, gridBagConstraints);
 
         hsUsername.setPreferredSize(new java.awt.Dimension(100, 30));
+        hsUsername.setEditable(false);
+        hsUsername.setBackground(new Color(224,224,224));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -165,6 +173,8 @@ public class HealthStaffPage extends javax.swing.JFrame {
         jPanel2.add(hsUsername, gridBagConstraints);
 
         puUsername.setPreferredSize(new java.awt.Dimension(100, 30));
+        puUsername.setEditable(false);
+        puUsername.setBackground(new Color(224,224,224));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -184,6 +194,8 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 15);
         jPanel2.add(jLabel5, gridBagConstraints);
 
+        infectionDate.setDateFormatString("dd/MM/yyyy");
+        infectionDate.setEnabled(false);
         infectionDate.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -196,6 +208,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
         jPanel2.add(infectionDate, gridBagConstraints);
 
         vaccinationDate.setDateFormatString("dd/MM/yyyy");
+        vaccinationDate.setEnabled(false);
         vaccinationDate.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -210,6 +223,11 @@ public class HealthStaffPage extends javax.swing.JFrame {
         buttonGroup1.add(iStatsYesBtn);
         iStatsYesBtn.setText("Yes");
         iStatsYesBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        iStatsYesBtn.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                iStatsYesBtnItemStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -235,6 +253,11 @@ public class HealthStaffPage extends javax.swing.JFrame {
         buttonGroup2.add(vStatsYesBtn);
         vStatsYesBtn.setText("Yes");
         vStatsYesBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        vStatsYesBtn.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                vStatsYesBtnItemStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -271,7 +294,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Username", "Vaccinated By", "Vaccination Status", "Vaccinated Date", "Determined By", "Infection Status", "Infected Date"
+                "Username", "Vaccinated By", "Vaccination Status", "Vaccination Date", "Determined By", "Infection Status", "Infection Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -376,17 +399,98 @@ public class HealthStaffPage extends javax.swing.JFrame {
 
     private void update(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update
         
-    }//GEN-LAST:event_update
-
-    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        // TODO add your handling code here:
         int i = jTable.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-        // Set PU Username
+        // Convert Vaccination/ Infection String to String (Y/N)
+        String vacStats;
+        String infStats;
+
+        if (vStatsYesBtn.isSelected()) {
+            vacStats = "Y";
+        }
+        
+        else {
+            vacStats = "N"; 
+        }
+        
+        if (iStatsYesBtn.isSelected()) {
+            infStats = "Y";
+        }
+        
+        else {
+            infStats = "N"; 
+        }
+
+        // Convert Vaccination/ Infection Date to String Type
+        
+        String recordVDate = model.getValueAt(i,3).toString();
+        String recordIDate = model.getValueAt(i,6).toString();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fieldVDate = dateFormat.format(vaccinationDate.getDate());
+        String fieldIDate = dateFormat.format(vaccinationDate.getDate());
+        
+        // If Vaccination Date is Updated
+
+        if (!recordVDate.equals(fieldVDate)) {
+            
+            UpdateVacStatusCtrler uvc = new UpdateVacStatusCtrler();
+            
+            try {
+                int validationNumber = uvc.update(hsUsername.getText(), puUsername.getText(),
+                        vacStats, vaccinationDate.getDate(), infStats, infectionDate.getDate());
+                
+                if (validationNumber == 0) {
+                       
+                    model.setRowCount(0);
+
+                    display();
+                    
+                    JOptionPane.showMessageDialog(null, "Send Vaccination Alert?");
+                }
+            } 
+            catch (IOException ex) {
+                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        // Else-If Infection Date is Updated
+
+        else if (!recordIDate.equals(fieldIDate)) {
+            
+            UpdateInfStatusCtrler uic = new UpdateInfStatusCtrler();
+            
+            try {
+                int validationNumber = uic.update(hsUsername.getText(), puUsername.getText(), 
+                    vacStats, vaccinationDate.getDate(), infStats, infectionDate.getDate());
+
+                if (validationNumber == 0) {
+
+                    model.setRowCount(0);
+
+                    display();
+
+                    JOptionPane.showMessageDialog(null, "Send Infection Alert?");
+                }
+            } 
+            catch (IOException ex) {
+                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_update
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+
+        int i = jTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+
+        // Populate PU Username
+      
         puUsername.setText(model.getValueAt(i, 0).toString());
 
-        // Set Vaccine Status
+        // Populate Vaccine Status
+        
         String vStats = model.getValueAt(i,2).toString();
         
         switch(vStats) {
@@ -394,27 +498,31 @@ public class HealthStaffPage extends javax.swing.JFrame {
             case "Y" -> {
                 vStatsYesBtn.setSelected(true);
                 vStatsNoBtn.setSelected(false);
+//                vaccinationDate.setEnabled(true);
+
             }  
             case "N" -> {
                 vStatsYesBtn.setSelected(false);
                 vStatsNoBtn.setSelected(true);
+                vaccinationDate.setEnabled(false);
             }
         }
-
-        // Set Vaccine Date
-        String vaccinationDateValue = model.getValueAt(i,3).toString();
         
+        // Populate Vaccine Date
+        
+        String vaccinationDateValue = model.getValueAt(i,3).toString();
+
         try {
-            java.util.Date date = new SimpleDateFormat("DD/MM/YYYY").parse(vaccinationDateValue);            
+            java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(vaccinationDateValue);            
             vaccinationDate.setDate(date); 
-            vaccinationDate.setDateFormatString(vaccinationDateValue);        
         } 
         
         catch (ParseException ex) {
             Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Set Infection Status
+        // Populate Infection Status
+        
         String iStats = model.getValueAt(i,5).toString();
         
         switch(iStats) {
@@ -422,20 +530,22 @@ public class HealthStaffPage extends javax.swing.JFrame {
             case "Y" -> {
                 iStatsYesBtn.setSelected(true);
                 iStatsNoBtn.setSelected(false);
+//                infectionDate.setEnabled(true);
             }  
             case "N" -> {
                 iStatsYesBtn.setSelected(false);
                 iStatsNoBtn.setSelected(true);
+                infectionDate.setEnabled(false);
             }
         }
         
-        // Set Infection Date
+        // Populate Infection Date
+        
         String infectionDateValue = model.getValueAt(i,6).toString();
         
         try {
-            java.util.Date date = new SimpleDateFormat("DD/MM/YYYY").parse(infectionDateValue);            
+            java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(infectionDateValue);            
             infectionDate.setDate(date); 
-            infectionDate.setDateFormatString(infectionDateValue);        
         } 
         
         catch (ParseException ex) {
@@ -450,6 +560,57 @@ public class HealthStaffPage extends javax.swing.JFrame {
         LoginPage lp = new LoginPage();
         lp.setVisible(true);
     }//GEN-LAST:event_logout
+
+    private void vStatsYesBtnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_vStatsYesBtnItemStateChanged
+
+        // Enable Vaccination-Date
+        int state = evt.getStateChange();
+        
+        if (state == ItemEvent.SELECTED) {           
+            
+            vaccinationDate.setEnabled(true); 
+        } 
+        
+        // Disable Vaccination-Date 
+        else if (state == ItemEvent.DESELECTED) {
+            
+            vaccinationDate.setEnabled(false);
+            
+            try {
+                java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/0001");
+                vaccinationDate.setDate(date);  
+            } 
+            catch (ParseException ex) {
+                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_vStatsYesBtnItemStateChanged
+
+    private void iStatsYesBtnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_iStatsYesBtnItemStateChanged
+
+        // Enable Infection-Date
+        int state = evt.getStateChange();
+        
+        if (state == ItemEvent.SELECTED) {    
+            
+            infectionDate.setEnabled(true); 
+        } 
+        
+        // Disable Infection-Date
+        else if (state == ItemEvent.DESELECTED) {
+            
+            infectionDate.setEnabled(false);
+            
+            try {
+                java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/0001");
+                infectionDate.setDate(date);  
+            } 
+            catch (ParseException ex) {
+                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            }        
+        }
+    }//GEN-LAST:event_iStatsYesBtnItemStateChanged
     
     private void display() throws IOException {
 
@@ -466,10 +627,10 @@ public class HealthStaffPage extends javax.swing.JFrame {
             rowData[0] = user.getUsername();
             rowData[1] = user.getVaccinatedBy();
             rowData[2] = user.getVaccinationStatus();
-            rowData[3] = user.getVaccinatedDate();
+            rowData[3] = user.getVaccinationDate();
             rowData[4] = user.getDeterminedBy();
             rowData[5] = user.getInfectionStatus();
-            rowData[6] = user.getInfectedDate();
+            rowData[6] = user.getInfectionDate();
             
             model.addRow(rowData);
         }

@@ -13,10 +13,10 @@ public class PublicUser extends User {
     
     private String vaccinatedBy;
     private String vaccinationStatus;
-    private String vaccinatedDate;
+    private String vaccinationDate;
     private String determinedBy;
     private String infectionStatus;
-    private String infectedDate;
+    private String infectionDate;
 
     public PublicUser() {
     }
@@ -24,17 +24,17 @@ public class PublicUser extends User {
     // Accessor Methods
     public String getVaccinatedBy() { return vaccinatedBy; }
     public String getVaccinationStatus() { return vaccinationStatus; }
-    public String getVaccinatedDate() { return vaccinatedDate; }
+    public String getVaccinationDate() { return vaccinationDate; }
     public String getDeterminedBy() { return determinedBy; }
     public String getInfectionStatus() { return infectionStatus; }
-    public String getInfectedDate() { return infectedDate; }
+    public String getInfectionDate() { return infectionDate; }
 
     // Mutator Methods
     public void setVaccinatedBy(String vaccinatedBy) { this.vaccinatedBy = vaccinatedBy; }
     public void setVaccinationStatus(String vaccinationStatus) { this.vaccinationStatus = vaccinationStatus; }
-    public void setVaccinatedDate(String vaccinatedDate) { this.vaccinatedDate = vaccinatedDate; }
+    public void setVaccinationDate(String vaccinationDate) { this.vaccinationDate = vaccinationDate; }
     public void setDeterminedBy(String determinedBy) { this.determinedBy = determinedBy; }
     public void setInfectionStatus(String infectionStatus) { this.infectionStatus = infectionStatus; }
-    public void setInfectedDate(String infectedDate) { this.infectedDate = infectedDate; }
+    public void setInfectionDate(String infectionDate) { this.infectionDate = infectionDate; }
     
 }

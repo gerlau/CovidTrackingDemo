@@ -8,6 +8,7 @@ package covidtrackingdemo.Entity;
 import covidtrackingdemo.HealthRecords;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -28,5 +29,12 @@ public class HealthStaff extends User {
         ArrayList<PublicUser> userList = hr.select();
         
         return userList;
+    }
+
+    public void update(String hsUsername, String puUsername, String vacStats, String strVaccinationDate, String infStats, String strInfectionDate) throws IOException {
+        
+        HealthRecords hr = new HealthRecords();
+        
+        hr.update(hsUsername, puUsername, vacStats, strVaccinationDate, infStats, strInfectionDate);    
     }
 }

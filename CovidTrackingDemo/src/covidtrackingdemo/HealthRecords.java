@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -29,38 +30,38 @@ public class HealthRecords {
     }
         
     // Update
-    public void update(String username, String vaccinatedBy, String vaccinationStatus, String vaccinatedDate, String determinedBy, String infectionStatus, String infectedDate) throws FileNotFoundException, IOException {
-        
-        String newData = "";
-    
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(path))) {
-            
-            newData = csvReader.readLine();
-            
-            String row;
-            
-            while ((row = csvReader.readLine()) != null) {
-                
-                String[] data = row.split(",");
-                
-                if (username.equals(data[0])) {
-                
-                    row = username + "," + vaccinatedBy + "," + vaccinationStatus + "," + vaccinatedDate + "," + determinedBy + "," + infectionStatus + "," + infectedDate;
-                }
-
-                newData = newData + "\n" + row;
-            }
-            
-            csvReader.close();
-        }
-        
-        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path))) {
-               
-            csvWriter.write(newData);
-            
-            csvWriter.close();
-        }
-    }
+//    public void update(String username, String vaccinatedBy, String vaccinationStatus, String vaccinationDate, String determinedBy, String infectionStatus, String infectionDate) throws FileNotFoundException, IOException {
+//        
+//        String newData = "";
+//    
+//        try (BufferedReader csvReader = new BufferedReader(new FileReader(path))) {
+//            
+//            newData = csvReader.readLine();
+//            
+//            String row;
+//            
+//            while ((row = csvReader.readLine()) != null) {
+//                
+//                String[] data = row.split(",");
+//                
+//                if (username.equals(data[0])) {
+//                
+//                    row = username + "," + vaccinatedBy + "," + vaccinationStatus + "," + vaccinationDate + "," + determinedBy + "," + infectionStatus + "," + infectionDate;
+//                }
+//
+//                newData = newData + "\n" + row;
+//            }
+//            
+//            csvReader.close();
+//        }
+//        
+//        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path))) {
+//               
+//            csvWriter.write(newData);
+//            
+//            csvWriter.close();
+//        }
+//    }
    
     // Select - individual
     public User select(String username) throws IOException {
@@ -82,10 +83,10 @@ public class HealthRecords {
                     user.setUsername(data[0]);
                     user.setVaccinatedBy(data[1]);
                     user.setVaccinationStatus(data[2]); 
-                    user.setVaccinatedDate(data[3]); 
+                    user.setVaccinationDate(data[3]); 
                     user.setDeterminedBy(data[4]);
                     user.setInfectionStatus(data[5]);
-                    user.setInfectedDate(data[6]);
+                    user.setInfectionDate(data[6]);
                     
                     return user;
                 } 
@@ -118,10 +119,10 @@ public class HealthRecords {
                 user.setUsername(data[0]);
                 user.setVaccinatedBy(data[1]);
                 user.setVaccinationStatus(data[2]); 
-                user.setVaccinatedDate(data[3]); 
+                user.setVaccinationDate(data[3]); 
                 user.setDeterminedBy(data[4]);
                 user.setInfectionStatus(data[5]);
-                user.setInfectedDate(data[6]);
+                user.setInfectionDate(data[6]);
                 
                 userList.add(user);
             }
@@ -130,6 +131,39 @@ public class HealthRecords {
         }
       
         return userList; 
+    }
+
+    public void update(String hsUsername, String puUsername, String vacStats, String strVaccinationDate, String infStats, String strInfectionDate) throws FileNotFoundException, IOException {
+      
+        String newData = "";
+    
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(path))) {
+            
+            newData = csvReader.readLine();
+            
+            String row;
+            
+            while ((row = csvReader.readLine()) != null) {
+                
+                String[] data = row.split(",");
+                
+                if (puUsername.equals(data[0])) {
+                
+                    row = puUsername + "," + hsUsername + "," + vacStats + "," + strVaccinationDate + "," + hsUsername + "," + infStats + "," + strInfectionDate;
+                }
+
+                newData = newData + "\n" + row;
+            }
+            
+            csvReader.close();
+        }
+        
+        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path))) {
+               
+            csvWriter.write(newData);
+            
+            csvWriter.close();
+        }
     }
 }
 

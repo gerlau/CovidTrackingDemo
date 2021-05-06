@@ -5,7 +5,7 @@
  */
 package covidtrackingdemo.Entity;
 
-import covidtrackingdemo.DemoDatabase;
+import covidtrackingdemo.UserProfiles;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,28 +19,28 @@ public class HealthOrganization extends User {
 
     public void create(String username, String password, String privilege, String firstName, String lastName) throws IOException {
                 
-        DemoDatabase db = new DemoDatabase();
+        UserProfiles db = new UserProfiles();
         
         db.insert(username, password, privilege, firstName, lastName);
     }    
     
     public void update(String username, String password, String privilege, String firstName, String lastName) throws IOException {
                 
-        DemoDatabase db = new DemoDatabase();
+        UserProfiles db = new UserProfiles();
         
         db.update(username, password, privilege, firstName, lastName);
     }
     
     public void suspend(String username, String password, String privilege, String firstName, String lastName) throws IOException {
     
-        DemoDatabase db = new DemoDatabase();
+        UserProfiles db = new UserProfiles();
         
         db.update(username, password, privilege, firstName, lastName);
     }
     
     public ArrayList<User> display() throws IOException {
     
-        DemoDatabase db = new DemoDatabase();
+        UserProfiles db = new UserProfiles();
         
         ArrayList<User> userList = db.select();
         

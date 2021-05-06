@@ -5,7 +5,7 @@
  */
 package covidtrackingdemo.Entity;
 
-import covidtrackingdemo.DemoDatabase;
+import covidtrackingdemo.UserProfiles;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -39,7 +39,7 @@ public class User {
     
     public String login(String username, String password) throws FileNotFoundException, IOException {
                 
-        DemoDatabase db = new DemoDatabase();
+        UserProfiles db = new UserProfiles();
         
         User user = db.select(username, password);
         
