@@ -67,9 +67,9 @@ public class HealthStaffPage extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        showUserBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -294,7 +294,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Username", "Vaccinated By", "Vaccination Status", "Vaccination Date", "Determined By", "Infection Status", "Infection Date"
+                "Username", "VaccinatedBy", "VaccinationStatus", "VaccinationDate", "DeterminedBy", "InfectionStatus", "InfectionDate"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -338,21 +338,6 @@ public class HealthStaffPage extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        showUserBtn.setText("SHOW");
-        showUserBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        showUserBtn.setPreferredSize(new java.awt.Dimension(98, 23));
-        showUserBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showUser(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 4);
-        jPanel4.add(showUserBtn, gridBagConstraints);
-
         updateBtn.setText("UPDATE");
         updateBtn.setPreferredSize(new java.awt.Dimension(98, 23));
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -362,9 +347,8 @@ public class HealthStaffPage extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(7, 4, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
         jPanel4.add(updateBtn, gridBagConstraints);
 
         logoutBtn.setText("LOGOUT");
@@ -378,7 +362,6 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
         jPanel4.add(logoutBtn, gridBagConstraints);
@@ -390,13 +373,20 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
         getContentPane().add(jPanel4, gridBagConstraints);
 
+        jButton1.setText("SEND EXPOSURE ALERTS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        getContentPane().add(jButton1, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void showUser(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showUser
-        
-    }//GEN-LAST:event_showUser
-
     private void update(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update
         
         int i = jTable.getSelectedRow();
@@ -611,6 +601,10 @@ public class HealthStaffPage extends javax.swing.JFrame {
             }        
         }
     }//GEN-LAST:event_iStatsYesBtnItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void display() throws IOException {
 
@@ -682,6 +676,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
     private javax.swing.JRadioButton iStatsNoBtn;
     private javax.swing.JRadioButton iStatsYesBtn;
     private com.toedter.calendar.JDateChooser infectionDate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -697,7 +692,6 @@ public class HealthStaffPage extends javax.swing.JFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JTextField puUsername;
-    private javax.swing.JButton showUserBtn;
     private javax.swing.JButton updateBtn;
     private javax.swing.JRadioButton vStatsNoBtn;
     private javax.swing.JRadioButton vStatsYesBtn;
