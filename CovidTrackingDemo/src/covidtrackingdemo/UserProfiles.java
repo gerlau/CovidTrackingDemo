@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author User
  */
-public class DemoDatabase {
+public class UserProfiles {
 
     /**
      * @param args the command line arguments
@@ -26,7 +26,7 @@ public class DemoDatabase {
      
     final String path; 
     
-    public DemoDatabase() {
+    public UserProfiles() {
        
         path = "dataset\\UserProfiles.csv";
     }
