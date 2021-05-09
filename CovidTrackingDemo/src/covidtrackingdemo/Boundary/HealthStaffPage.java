@@ -9,6 +9,8 @@ import covidtrackingdemo.Controller.HealthStaff.UpdateVacStatusCtrler;
 import covidtrackingdemo.Controller.HealthStaff.UpdateInfStatusCtrler;
 import covidtrackingdemo.Controller.HealthStaff.DisplayController;
 import covidtrackingdemo.Controller.HealthStaff.SendExpAlertCtrler;
+import covidtrackingdemo.Controller.HealthStaff.SendInfAlertCtrler;
+import covidtrackingdemo.Controller.HealthStaff.SendVacAlertCtrler;
 import covidtrackingdemo.Entity.PublicUser;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
@@ -461,47 +463,85 @@ public class HealthStaffPage extends javax.swing.JFrame {
 
         if (!recordVDate.equals(fieldVDate)) {
             
-            UpdateVacStatusCtrler uvc = new UpdateVacStatusCtrler();
-            
-            try {
-                int validationNumber = uvc.update(hsUsername.getText(), puUsername.getText(),
-                        vacStats, vaccinationDate.getDate(), infStats, infectionDate.getDate());
-                
-                if (validationNumber == 0) {
-                       
-                    model.setRowCount(0);
+            int confirmationNumber = JOptionPane.showConfirmDialog(this ,"Infection Vaccination Alert will be sent upon update. Proceed?", "",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
 
-                    display();
+            // If User agrees to Update Vac with Send Alert
+            
+            if (confirmationNumber == 0) {
+            
+                UpdateVacStatusCtrler uvc = new UpdateVacStatusCtrler();
+
+                SendVacAlertCtrler svc = new SendVacAlertCtrler();
+
+                try {
+                    int validationNumber = uvc.update(hsUsername.getText(), puUsername.getText(),
+                            vacStats, vaccinationDate.getDate(), infStats, infectionDate.getDate());
+
+                    if (validationNumber == 0) {
+                        
+                        svc.sendVacAlert(puUsername.getText(), "vaccination", vaccinationDate.getDate());
+
+                        model.setRowCount(0);
+
+                        display();
+
+                        JOptionPane.showMessageDialog(null, "Send Vaccination Alert?");
+                    }
                     
-                    JOptionPane.showMessageDialog(null, "Send Vaccination Alert?");
+                    else {
+                        
+                        JOptionPane.showMessageDialog(null, "Please enter a new and valid vaccination date");   
+                    }
+                } 
+                catch (IOException ex) {
+                    
+                    Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } 
-            catch (IOException ex) {
-                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
         // Else-If Infection Date is Updated
 
         else if (!recordIDate.equals(fieldIDate)) {
-            
-            UpdateInfStatusCtrler uic = new UpdateInfStatusCtrler();
-            
-            try {
-                int validationNumber = uic.update(hsUsername.getText(), puUsername.getText(), 
-                    vacStats, vaccinationDate.getDate(), infStats, infectionDate.getDate());
 
-                if (validationNumber == 0) {
+            int confirmationNumber = JOptionPane.showConfirmDialog(this ,"Infection Notification Alert will be sent upon update. Proceed?", "",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
 
-                    model.setRowCount(0);
+             if (confirmationNumber == 0) {
+                 
+                UpdateInfStatusCtrler uic = new UpdateInfStatusCtrler();
 
-                    display();
+                SendInfAlertCtrler sic = new SendInfAlertCtrler();
 
-                    JOptionPane.showMessageDialog(null, "Send Infection Alert?");
+                // If User agrees to Update Inf with Send Alert
+
+                try {
+
+                    int validationNumber = uic.update(hsUsername.getText(), puUsername.getText(), 
+                        vacStats, vaccinationDate.getDate(), infStats, infectionDate.getDate());
+
+                    if (validationNumber == 0) {
+
+                        sic.sendInfAlert(puUsername.getText(), "infection", infectionDate.getDate());
+
+                        model.setRowCount(0);
+
+                        display();
+                    }
+                    
+                    else {
+
+                        JOptionPane.showMessageDialog(null, "Please enter a new and valid infection date");   
+                    }
+                } 
+                
+                catch (IOException ex) {
+                    
+                    Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } 
-            catch (IOException ex) {
-                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_update
@@ -595,12 +635,20 @@ public class HealthStaffPage extends javax.swing.JFrame {
         if (state == ItemEvent.SELECTED) {           
             
             vaccinationDate.setEnabled(true); 
+            
+            iStatsYesBtn.setEnabled(false);
+            
+            iStatsNoBtn.setEnabled(false);
         } 
         
         // Disable Vaccination-Date 
         else if (state == ItemEvent.DESELECTED) {
             
             vaccinationDate.setEnabled(false);
+            
+            iStatsYesBtn.setEnabled(true);
+            
+            iStatsNoBtn.setEnabled(true);
             
             try {
                 java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/0001");
@@ -621,12 +669,20 @@ public class HealthStaffPage extends javax.swing.JFrame {
         if (state == ItemEvent.SELECTED) {    
             
             infectionDate.setEnabled(true); 
+            
+            vStatsYesBtn.setEnabled(false);
+            
+            vStatsNoBtn.setEnabled(false);
         } 
         
         // Disable Infection-Date
         else if (state == ItemEvent.DESELECTED) {
             
             infectionDate.setEnabled(false);
+            
+            vStatsYesBtn.setEnabled(true);
+            
+            vStatsNoBtn.setEnabled(true);
             
             try {
                 java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/0001");

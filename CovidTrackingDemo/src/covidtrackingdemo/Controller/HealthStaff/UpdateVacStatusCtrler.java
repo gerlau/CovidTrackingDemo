@@ -49,7 +49,7 @@ public class UpdateVacStatusCtrler {
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
-        String strDate = sdf.format(vaccinationDate);
+        String strDate = sdf.format(dateDate);
         
         if (!strDate.equals(sdf.format(dateDate))) {
             return ""; 

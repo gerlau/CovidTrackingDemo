@@ -1,4 +1,8 @@
-Username,AlertType,AlertDate,Count,IsAcknowledged
-AJ5@example.com,vaccination,30/04/2021,1,Yes
-JW2@example.com,infection,07/05/2021,1,No
-LW499@example.com,exposure,07/05/2021,1,No
+Username,AlertType,AlertDate,IsAcknowledged
+AJ5@example.com,vaccination,30/4/2021,TRUE
+JW2@example.com,infection,7/5/2021,FALSE
+LW499@example.com,exposure,7/5/2021,FALSE
+EN3@example.com,vaccination,01/01/0001,FALSE
+JW2@example.com,infection,8/5/2021,FALSE
+EN3@example.com,vaccination,21/01/0001,FALSE
+EN3@example.com,vaccination,01/01/0001,FALSE
