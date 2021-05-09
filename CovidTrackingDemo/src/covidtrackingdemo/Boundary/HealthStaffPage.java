@@ -8,6 +8,7 @@ package covidtrackingdemo.Boundary;
 import covidtrackingdemo.Controller.HealthStaff.UpdateVacStatusCtrler;
 import covidtrackingdemo.Controller.HealthStaff.UpdateInfStatusCtrler;
 import covidtrackingdemo.Controller.HealthStaff.DisplayController;
+import covidtrackingdemo.Controller.HealthStaff.SendExpAlertCtrler;
 import covidtrackingdemo.Entity.PublicUser;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
@@ -16,6 +17,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -69,7 +72,10 @@ public class HealthStaffPage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         updateBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        exposedBtn = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        currentDate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -93,7 +99,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -373,16 +379,46 @@ public class HealthStaffPage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
         getContentPane().add(jPanel4, gridBagConstraints);
 
-        jButton1.setText("SEND EXPOSURE ALERTS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel5.setPreferredSize(new java.awt.Dimension(472, 74));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        exposedBtn.setText("SEND EXPOSURE ALERTS");
+        exposedBtn.setPreferredSize(new java.awt.Dimension(500, 23));
+        exposedBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                exposedBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 10, 3, 10);
+        jPanel5.add(exposedBtn, gridBagConstraints);
+
+        jLabel8.setText("Exposure alert date : ");
+        jLabel8.setPreferredSize(new java.awt.Dimension(107, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 16, 0);
+        jPanel5.add(jLabel8, gridBagConstraints);
+
+        currentDate.setText("jLabel9");
+        currentDate.setPreferredSize(new java.awt.Dimension(35, 23));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 16, 0);
+        jPanel5.add(currentDate, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        getContentPane().add(jButton1, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
+        getContentPane().add(jPanel5, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -602,9 +638,29 @@ public class HealthStaffPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_iStatsYesBtnItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void exposedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exposedBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        SendExpAlertCtrler ec = new SendExpAlertCtrler();
+        
+        try {
+            Set<String> exposedList = ec.sendExpAlert(currentDate.getText());
+            
+            Iterator<String> i = exposedList.iterator();
+        
+            String message = "Exposure alert sent to:\n";
+        
+            while (i.hasNext()){
+                message += "- " + i.next() + "\n";
+            }
+            
+            JOptionPane.showMessageDialog(this, message);
+                        
+        } catch (IOException ex) {
+            Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_exposedBtnActionPerformed
     
     private void display() throws IOException {
 
@@ -628,6 +684,11 @@ public class HealthStaffPage extends javax.swing.JFrame {
             
             model.addRow(rowData);
         }
+        
+        // Show current exposure alert date
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        currentDate.setText(formatter.format(date));
     }
 
     /**
@@ -672,11 +733,12 @@ public class HealthStaffPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel currentDate;
+    private javax.swing.JButton exposedBtn;
     private javax.swing.JTextField hsUsername;
     private javax.swing.JRadioButton iStatsNoBtn;
     private javax.swing.JRadioButton iStatsYesBtn;
     private com.toedter.calendar.JDateChooser infectionDate;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -684,10 +746,12 @@ public class HealthStaffPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
     private javax.swing.JButton logoutBtn;

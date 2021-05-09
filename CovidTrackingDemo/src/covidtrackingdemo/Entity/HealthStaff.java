@@ -7,8 +7,8 @@ package covidtrackingdemo.Entity;
 
 import covidtrackingdemo.HealthRecords;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -36,5 +36,24 @@ public class HealthStaff extends User {
         HealthRecords hr = new HealthRecords();
         
         hr.update(hsUsername, puUsername, vacStats, strVaccinationDate, infStats, strInfectionDate);    
+    }
+    
+    public ArrayList<String> findInfected(String currentDate) throws IOException, ParseException {  
+        
+        HealthRecords hr = new HealthRecords();
+        
+        ArrayList<String> infectedList = new ArrayList<>();
+         
+        ArrayList<PublicUser> recordList = hr.select();
+        
+        for (PublicUser user : recordList) {
+                        
+            if (currentDate.equals(user.getInfectionDate())) {
+            
+                infectedList.add(user.getUsername());
+            }
+        }
+        
+        return infectedList;
     }
 }

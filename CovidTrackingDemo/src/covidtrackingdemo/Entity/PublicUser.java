@@ -36,5 +36,4 @@ public class PublicUser extends User {
     public void setDeterminedBy(String determinedBy) { this.determinedBy = determinedBy; }
     public void setInfectionStatus(String infectionStatus) { this.infectionStatus = infectionStatus; }
     public void setInfectionDate(String infectionDate) { this.infectionDate = infectionDate; }
-    
 }
