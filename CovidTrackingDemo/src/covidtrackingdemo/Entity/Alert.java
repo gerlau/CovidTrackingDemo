@@ -53,6 +53,21 @@ public class Alert {
     }
     
     // Other Methods
+    
+    public void sendVacAlert(String puUsername, String alertType, String strVaccinationDate) throws IOException {
+
+        AlertRecords ar = new AlertRecords();
+        
+        ar.insert(puUsername, alertType, strVaccinationDate, false);
+    }
+    
+    public void sendInfAlert(String puUsername, String alertType, String strInfectionDate) throws IOException {
+
+        AlertRecords ar = new AlertRecords();
+        
+        ar.insert(puUsername, alertType, strInfectionDate, false);
+    }
+    
     public Boolean sendExpAlert(Set<String> exposedList, String currentDate) throws IOException {
     
         AlertRecords ar = new AlertRecords();
