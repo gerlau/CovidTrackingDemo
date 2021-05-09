@@ -1,0 +1,7 @@
+Username,AlertType,AlertDate,Count,IsAcknowledged
+AJ5@example.com,vaccination,30/04/2021,1,No
+JW2@example.com,infection,07/05/2021,1,No
+LW499@example.com,exposure,07/05/2021,1,No
+CC4@example.com,vaccination,02/04/2021,1,No
+SM6@example.com,vaccination,08/01/0001,1,No
+LM7@example.com,vaccination,30/04/2021,1,No

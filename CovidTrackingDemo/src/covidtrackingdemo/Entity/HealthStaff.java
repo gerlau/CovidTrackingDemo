@@ -5,6 +5,7 @@
  */
 package covidtrackingdemo.Entity;
 
+import covidtrackingdemo.AlertRecords;
 import covidtrackingdemo.HealthRecords;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,5 +37,19 @@ public class HealthStaff extends User {
         HealthRecords hr = new HealthRecords();
         
         hr.update(hsUsername, puUsername, vacStats, strVaccinationDate, infStats, strInfectionDate);    
+    }
+
+    public void sendVacAlert(String puUsername, String alertType, String strVaccinationDate) throws IOException {
+
+        AlertRecords ar = new AlertRecords();
+        
+        ar.sendVacAlert(puUsername, alertType, strVaccinationDate);
+    }
+    
+    public void sendInfAlert(String puUsername, String alertType, String strInfectionDate) throws IOException {
+
+        AlertRecords ar = new AlertRecords();
+        
+        ar.sendVacAlert(puUsername, alertType, strInfectionDate);
     }
 }

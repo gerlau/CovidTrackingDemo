@@ -1,4 +1,0 @@
-Username,AlertType,AlertDate,Count,IsAcknowledged
-AJ5@example.com,vaccination,30/04/2021,1,Yes
-JW2@example.com,infection,07/05/2021,1,No
-LW499@example.com,exposure,07/05/2021,1,No
