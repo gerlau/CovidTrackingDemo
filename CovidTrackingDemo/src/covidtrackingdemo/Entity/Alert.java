@@ -80,4 +80,18 @@ public class Alert {
         
         return true;
     }
+    
+    public ArrayList<Alert> showAlert() throws IOException {
+    
+        AlertRecords ar = new AlertRecords();
+       
+        return ar.select();
+    }
+    
+    public void acknowledge(String username, String alertType, String alertDate) throws IOException {
+    
+        AlertRecords ar = new AlertRecords();
+        
+        ar.update(username, alertType, alertDate);
+    }
 }

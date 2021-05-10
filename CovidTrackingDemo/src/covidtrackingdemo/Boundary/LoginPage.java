@@ -8,6 +8,7 @@ package covidtrackingdemo.Boundary;
 
 import covidtrackingdemo.Controller.HealthOrganization.LoginController;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -131,6 +132,7 @@ public class LoginPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Valid credentials. Business owner");
                     BusinessOwnerPage businessOwner = new BusinessOwnerPage();
                     businessOwner.setVisible(true);
+                    businessOwner.setUsername(username.getText());
                 }
                 case "Health Staff" -> {
                     JOptionPane.showMessageDialog(this, "Valid credentials. Health staff");
