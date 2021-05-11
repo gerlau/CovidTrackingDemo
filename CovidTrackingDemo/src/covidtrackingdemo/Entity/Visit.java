@@ -46,6 +46,13 @@ public class Visit {
     }
     
     // Other Methods
+    public ArrayList<Visit> display() throws IOException {
+        
+        VisitRecords vr = new VisitRecords();
+        
+        return vr.select();
+    }
+    
     public Set<String> findExposed(ArrayList<String> infectedList, String currentDate) throws IOException {
         
         Set<String> exposedList = new HashSet<>();

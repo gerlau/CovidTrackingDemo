@@ -5,26 +5,48 @@
  */
 package covidtrackingdemo.Boundary;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import covidtrackingdemo.Controller.BusinessOwner.AcknowledgeController;
+import covidtrackingdemo.Controller.BusinessOwner.DisplayController;
+import covidtrackingdemo.Controller.BusinessOwner.ShowAlertController;
+import covidtrackingdemo.Entity.User;
+import covidtrackingdemo.Entity.Visit;
+import java.awt.List;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author User
+ * @author barry
  */
 public class BusinessOwnerPage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form HealthStaffPage
-     */
-    public BusinessOwnerPage() {
-        initComponents();
         
-        Toolkit toolkit = getToolkit();
-        Dimension size = toolkit.getScreenSize();
-        setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
+    public BusinessOwnerPage() throws IOException {
+        initComponents();
+        setExtendedState(MAXIMIZED_BOTH); 
     }
-
+    
+    public void setUsername(String username) throws IOException {
+    
+        accName.setText("Welcome, " + username);
+        
+        for (String s : accName.getText().split(" ")) {
+            
+            System.out.println(s);
+        }
+        
+        showAlert(accName.getText().split(" ")[1]);
+       
+        jDateChooser1.setDate(new Date());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,33 +55,303 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        alertList = new javax.swing.JList<>();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        ackBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        date = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        visitorCount = new javax.swing.JLabel();
+        accName = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setMinimumSize(new java.awt.Dimension(127, 400));
+        setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Health Staff Page");
+        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(120, 120));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(151, 151, 151))
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("BUSINESS OWNER");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel7.setPreferredSize(new java.awt.Dimension(127, 48));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(jLabel1)
-                .addContainerGap(150, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(312, 200));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        alertList.setPreferredSize(new java.awt.Dimension(252, 80));
+        jScrollPane1.setViewportView(alertList);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jScrollPane1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
+        getContentPane().add(jPanel2, gridBagConstraints);
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(472, 264));
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Public User", "Visited Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(167, 167, 167))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
+        getContentPane().add(jPanel3, gridBagConstraints);
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        ackBtn.setText("ACKNOWLEDGE");
+        ackBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        ackBtn.setPreferredSize(new java.awt.Dimension(252, 23));
+        ackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acknowledge(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
+        jPanel4.add(ackBtn, gridBagConstraints);
+
+        logoutBtn.setText("LOGOUT");
+        logoutBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        logoutBtn.setPreferredSize(new java.awt.Dimension(252, 23));
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 7, 0);
+        jPanel4.add(logoutBtn, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 0, 15);
+        getContentPane().add(jPanel4, gridBagConstraints);
+
+        jPanel5.setPreferredSize(new java.awt.Dimension(34, 30));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        date.setText("Date");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 7.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
+        jPanel5.add(date, gridBagConstraints);
+
+        jDateChooser1.setPreferredSize(new java.awt.Dimension(100, 30));
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 8.0;
+        jPanel5.add(jDateChooser1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(15, 10, 0, 10);
+        getContentPane().add(jPanel5, gridBagConstraints);
+
+        visitorCount.setText("Visitor Count");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        getContentPane().add(visitorCount, gridBagConstraints);
+
+        accName.setText("Welcome,  Test");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(accName, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void acknowledge(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acknowledge
+        
+        ArrayList<String> selectedList = new ArrayList<>();
+        
+        int[] selectedIx = alertList.getSelectedIndices();
+        
+        for (int i = 0; i < selectedIx.length; i++) {
+            
+            String selected = alertList.getModel().getElementAt(selectedIx[i]);
+            
+            selectedList.add(accName.getText().split(" ")[1] + " " + selected);
+        }
+        
+        AcknowledgeController ac = new AcknowledgeController();
+            
+        try {
+            ac.acknowledge(selectedList);
+            
+            JOptionPane.showMessageDialog(this, "Alert acknowledged");
+            
+            // showAlert(accName.getText().split(" ")[1]);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(BusinessOwnerPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_acknowledge
 
+    private void logout(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout
+        // TODO add your handling code here:
+        dispose();
+        
+        LoginPage lp = new LoginPage();
+        lp.setVisible(true);
+    }//GEN-LAST:event_logout
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        
+        try {
+            // TODO add your handling code here:
+            display(jDateChooser1.getDate());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(BusinessOwnerPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(BusinessOwnerPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+    
+    private void display(java.util.Date date) throws IOException, ParseException {
+        
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        model.setRowCount(0);
+        
+        DisplayController dc = new DisplayController();
+       
+        ArrayList<Visit> visitorList = dc.display(date);
+        
+        Object rowData[] = new Object[2];
+        
+        for (Visit visitor : visitorList) {
+           
+            rowData[0] = visitor.getPublicUser();
+            rowData[1] = visitor.getVisitedDate();
+            
+            model.addRow(rowData);
+        }
+        
+        String count = Integer.toString(model.getRowCount());
+        visitorCount.setText("Visitor Count: " + count);
+    }
+
+    private void showAlert(String accName) throws IOException {
+            
+         DefaultListModel<String> model = new DefaultListModel<>(); 
+         
+         ShowAlertController sac = new ShowAlertController();
+         ArrayList<String> exposedDates = sac.showAlert(accName);
+         
+         for (String exposedDate : exposedDates) {
+            
+             model.addElement("exposure alert : " + exposedDate);
+         }
+         
+         alertList.setModel(model);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -77,28 +369,46 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BusinessOwnerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BusinessOwnerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BusinessOwnerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BusinessOwnerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BusinessOwnerPage().setVisible(true);
+                try {
+                    new BusinessOwnerPage().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(BusinessOwnerPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel accName;
+    private javax.swing.JButton ackBtn;
+    private javax.swing.JList<String> alertList;
+    private javax.swing.JButton createBtn;
+    private javax.swing.JLabel date;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JLabel visitorCount;
     // End of variables declaration//GEN-END:variables
 }
