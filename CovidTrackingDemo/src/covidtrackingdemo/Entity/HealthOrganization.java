@@ -38,6 +38,15 @@ public class HealthOrganization extends User {
         db.update(username, password, privilege, firstName, lastName);
     }
     
+    public User display(String accName) throws IOException {
+    
+        UserProfiles db = new UserProfiles();
+        
+        User user = db.select(accName);
+        
+        return user;
+    }
+    
     public ArrayList<User> display() throws IOException {
     
         UserProfiles db = new UserProfiles();

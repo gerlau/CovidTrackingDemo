@@ -5,6 +5,10 @@
  */
 package covidtrackingdemo.Entity;
 
+import covidtrackingdemo.UserProfiles;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author barry

@@ -18,7 +18,14 @@ public class HealthStaff extends User {
     
     public HealthStaff() {}
     
-    public void showUser() {}
+    public PublicUser showUser(String username) throws IOException {
+    
+        HealthRecords hr = new HealthRecords();
+        
+        PublicUser user = hr.select(username);
+        
+        return user;
+    }
     
     public void update() {}
     

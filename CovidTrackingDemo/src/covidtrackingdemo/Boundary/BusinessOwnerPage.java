@@ -6,8 +6,9 @@
 package covidtrackingdemo.Boundary;
 
 import covidtrackingdemo.Controller.BusinessOwner.AcknowledgeController;
-import covidtrackingdemo.Controller.BusinessOwner.DisplayController;
+import covidtrackingdemo.Controller.BusinessOwner.ShowVisitorController;
 import covidtrackingdemo.Controller.BusinessOwner.ShowAlertController;
+import covidtrackingdemo.Entity.Alert;
 import covidtrackingdemo.Entity.User;
 import covidtrackingdemo.Entity.Visit;
 import java.awt.List;
@@ -27,26 +28,13 @@ import javax.swing.table.DefaultTableModel;
  * @author barry
  */
 public class BusinessOwnerPage extends javax.swing.JFrame {
-        
+            
+    private String currentUser;
+    
     public BusinessOwnerPage() throws IOException {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH); 
-    }
-    
-    public void setUsername(String username) throws IOException {
-    
-        accName.setText("Welcome, " + username);
-        
-        for (String s : accName.getText().split(" ")) {
-            
-            System.out.println(s);
-        }
-        
-        showAlert(accName.getText().split(" ")[1]);
-       
-        jDateChooser1.setDate(new Date());
-    }
-    
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,8 +59,9 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         date = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
         visitorCount = new javax.swing.JLabel();
-        accName = new javax.swing.JLabel();
+        welcomeMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -231,11 +220,6 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
         jPanel5.add(date, gridBagConstraints);
 
         jDateChooser1.setPreferredSize(new java.awt.Dimension(100, 30));
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -243,6 +227,17 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 8.0;
         jPanel5.add(jDateChooser1, gridBagConstraints);
+
+        jButton1.setText("SHOW");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showVisitor(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        jPanel5.add(jButton1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -257,15 +252,26 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         getContentPane().add(visitorCount, gridBagConstraints);
 
-        accName.setText("Welcome,  Test");
+        welcomeMsg.setText("Welcome,  Test");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        getContentPane().add(accName, gridBagConstraints);
+        getContentPane().add(welcomeMsg, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    public void setUsername(String username) throws IOException, ParseException {
+    
+        welcomeMsg.setText("Welcome, " + username);
+        
+        this.currentUser = username;
+        
+        showAlert();
+       
+        jDateChooser1.setDate(new Date());
+    }
+
     private void acknowledge(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acknowledge
         
         ArrayList<String> selectedList = new ArrayList<>();
@@ -276,7 +282,7 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
             
             String selected = alertList.getModel().getElementAt(selectedIx[i]);
             
-            selectedList.add(accName.getText().split(" ")[1] + " " + selected);
+            selectedList.add(currentUser + " " + selected);
         }
         
         AcknowledgeController ac = new AcknowledgeController();
@@ -286,7 +292,7 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(this, "Alert acknowledged");
             
-            // showAlert(accName.getText().split(" ")[1]);
+            showAlert();
             
         } catch (IOException ex) {
             Logger.getLogger(BusinessOwnerPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -301,55 +307,52 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
         lp.setVisible(true);
     }//GEN-LAST:event_logout
 
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+    private void showVisitor(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showVisitor
+        // TODO add your handling code here:
         
-        try {
-            // TODO add your handling code here:
-            display(jDateChooser1.getDate());
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        model.setRowCount(0);
+        
+        ShowVisitorController sv = new ShowVisitorController();
             
+        ArrayList<Visit> visitorList;
+       
+        try {
+            visitorList = sv.showVisitor(jDateChooser1.getDate(), currentUser);
+            
+            Object rowData[] = new Object[2];
+        
+            for (Visit visitor : visitorList) {
+
+                rowData[0] = visitor.getPublicUser();
+                rowData[1] = visitor.getVisitedDate();
+
+                model.addRow(rowData);
+            }
+
+            String count = Integer.toString(model.getRowCount());
+            visitorCount.setText("Visitor Count: " + count);
+        
         } catch (IOException ex) {
             Logger.getLogger(BusinessOwnerPage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(BusinessOwnerPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jDateChooser1PropertyChange
-    
-    private void display(java.util.Date date) throws IOException, ParseException {
-        
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.setRowCount(0);
-        
-        DisplayController dc = new DisplayController();
-       
-        ArrayList<Visit> visitorList = dc.display(date);
-        
-        Object rowData[] = new Object[2];
-        
-        for (Visit visitor : visitorList) {
-           
-            rowData[0] = visitor.getPublicUser();
-            rowData[1] = visitor.getVisitedDate();
-            
-            model.addRow(rowData);
-        }
-        
-        String count = Integer.toString(model.getRowCount());
-        visitorCount.setText("Visitor Count: " + count);
-    }
+    }//GEN-LAST:event_showVisitor
 
-    private void showAlert(String accName) throws IOException {
+    private void showAlert() throws IOException {
             
-         DefaultListModel<String> model = new DefaultListModel<>(); 
+        DefaultListModel<String> model = new DefaultListModel<>(); 
          
-         ShowAlertController sac = new ShowAlertController();
-         ArrayList<String> exposedDates = sac.showAlert(accName);
+        ShowAlertController sac = new ShowAlertController();
+        ArrayList<Alert> aList = sac.showAlert(currentUser);
          
-         for (String exposedDate : exposedDates) {
+        for (Alert a : aList) {
             
-             model.addElement("exposure alert : " + exposedDate);
-         }
+            model.addElement(a.getAlertType() + " alert : " + a.getAlertDate());
+        }
          
-         alertList.setModel(model);
+        alertList.setModel(model);
     }
     
     /**
@@ -392,11 +395,10 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel accName;
     private javax.swing.JButton ackBtn;
     private javax.swing.JList<String> alertList;
-    private javax.swing.JButton createBtn;
     private javax.swing.JLabel date;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -404,11 +406,11 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel visitorCount;
+    private javax.swing.JLabel welcomeMsg;
     // End of variables declaration//GEN-END:variables
 }

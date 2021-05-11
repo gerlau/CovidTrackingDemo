@@ -46,12 +46,19 @@ public class Visit {
     }
     
     // Other Methods
+    public void checkIn(String businessOwner, String publicUser, String date) throws IOException {
+    
+        VisitRecords vr = new VisitRecords();
+        
+        vr.insert(businessOwner, publicUser, date);
+    }
+    
     public ArrayList<Visit> display() throws IOException {
         
         VisitRecords vr = new VisitRecords();
         
         return vr.select();
-    }
+    } 
     
     public Set<String> findExposed(ArrayList<String> infectedList, String currentDate) throws IOException {
         

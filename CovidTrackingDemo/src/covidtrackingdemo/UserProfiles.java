@@ -86,7 +86,7 @@ public class UserProfiles {
     public void delete() {}
     
     // Select - individual
-    public User select(String username, String password) throws IOException {
+    public User select(String username) throws IOException {
         
         try (BufferedReader csvReader = new BufferedReader(new FileReader(path))) {
             
@@ -98,7 +98,7 @@ public class UserProfiles {
                 
                 String[] data = row.split(",");
                 
-                if (username.equals(data[0]) && password.equals(data[1])){
+                if (username.equals(data[0])){
                     
                     User user = new User();
                     

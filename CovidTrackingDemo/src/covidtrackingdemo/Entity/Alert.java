@@ -92,6 +92,8 @@ public class Alert {
     
         AlertRecords ar = new AlertRecords();
         
-        ar.update(username, alertType, alertDate);
+        // ar.update(username, alertType, alertDate);
+        
+        ar.delete(username, alertType, alertDate);
     }
 }
