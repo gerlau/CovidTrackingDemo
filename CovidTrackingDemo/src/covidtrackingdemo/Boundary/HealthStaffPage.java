@@ -17,7 +17,10 @@ import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -564,7 +567,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
             case "Y" -> {
                 vStatsYesBtn.setSelected(true);
                 vStatsNoBtn.setSelected(false);
-//                vaccinationDate.setEnabled(true);
+                vaccinationDate.setEnabled(true);
 
             }  
             case "N" -> {
@@ -596,7 +599,7 @@ public class HealthStaffPage extends javax.swing.JFrame {
             case "Y" -> {
                 iStatsYesBtn.setSelected(true);
                 iStatsNoBtn.setSelected(false);
-//                infectionDate.setEnabled(true);
+                infectionDate.setEnabled(true);
             }  
             case "N" -> {
                 iStatsYesBtn.setSelected(false);
@@ -629,68 +632,259 @@ public class HealthStaffPage extends javax.swing.JFrame {
 
     private void vStatsYesBtnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_vStatsYesBtnItemStateChanged
 
-        // Enable Vaccination-Date
-        int state = evt.getStateChange();
+        int state = evt.getStateChange();        
+
+        // Get Vaccination Date from File
         
-        if (state == ItemEvent.SELECTED) {           
+        int i = jTable.getSelectedRow();
+        
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+
+        String fileVStats = model.getValueAt(i,2).toString();
+        
+        String pageVStats;
+        
+        if (vStatsYesBtn.isSelected())
             
-            vaccinationDate.setEnabled(true); 
+            pageVStats = "Y";
+        
+        else {
+            
+            pageVStats = "N";
+        }
+        
+        // If User click/select Yes Btn
+        // ... Enable vaccine date
+
+        if (state == ItemEvent.SELECTED) {
+            
+            vaccinationDate.setEnabled(true);
+        }
+
+        // If User click/select No Btn
+        // ... Disable vaccine date
+
+        else {
+            
+            vaccinationDate.setEnabled(false);
+        }
+
+        // If User click Diff VStats Btn as Health Records
+        // ... Disable infection fields
+
+        if (!fileVStats.equals(pageVStats)) {
             
             iStatsYesBtn.setEnabled(false);
             
             iStatsNoBtn.setEnabled(false);
-        } 
-        
-        // Disable Vaccination-Date 
-        else if (state == ItemEvent.DESELECTED) {
             
-            vaccinationDate.setEnabled(false);
+            infectionDate.setEnabled(false);
+        }
+
+        // If User click Same VStats Btn as Health Records
+        // ... Enable infection fields
+
+        else {
             
             iStatsYesBtn.setEnabled(true);
             
-            iStatsNoBtn.setEnabled(true);
+            iStatsNoBtn.setEnabled(true); 
             
-            try {
-                java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/0001");
-                vaccinationDate.setDate(date);  
-            } 
-            catch (ParseException ex) {
-                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+            String strInfectionDate = sdf.format(infectionDate.getDate());
+            
+            if (!strInfectionDate.equals("01/01/0001")) {
+                
+                infectionDate.setEnabled(true);
+            }
+        }
+        
+        // Populate Vaccine Date on Toggling VStats Btn
+        // ... With vaccine date if any. Else today date
+
+        String strVaccinationDate = model.getValueAt(i,3).toString();
+
+        if (pageVStats.equals("Y")) {
+
+            if (fileVStats.equals("Y")) {
+                
+                try {
+
+                    java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(strVaccinationDate);
+
+                    vaccinationDate.setDate(date);  
+                } 
+
+                catch (ParseException ex) {
+
+                    Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+                }     
+            }
+            
+            else {
+
+                try {
+                                        
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                    LocalDate localDate = LocalDate.now();
+                    
+                    java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dtf.format(localDate));
+
+                    vaccinationDate.setDate(date);  
+                } 
+
+                catch (ParseException ex) {
+
+                    Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+                }     
             }
         }
 
+        else { // if (pageVStats.equals("N")) { 
+
+            try {
+
+                java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/0001");
+
+                vaccinationDate.setDate(date);  
+            } 
+
+            catch (ParseException ex) {
+
+                Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
     }//GEN-LAST:event_vStatsYesBtnItemStateChanged
 
     private void iStatsYesBtnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_iStatsYesBtnItemStateChanged
 
-        // Enable Infection-Date
-        int state = evt.getStateChange();
+        int state = evt.getStateChange();        
+
+        // Get Vaccination Date from File
         
-        if (state == ItemEvent.SELECTED) {    
+        int i = jTable.getSelectedRow();
+        
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+
+        String fileIStats = model.getValueAt(i,5).toString();
+        
+        String pageIStats;
+        
+        if (iStatsYesBtn.isSelected())
             
-            infectionDate.setEnabled(true); 
+            pageIStats = "Y";
+        
+        else {
+            
+            pageIStats = "N";
+        }
+        
+        // If User click/select Yes Btn
+        // ... Enable infection date
+
+        if (state == ItemEvent.SELECTED) {
+            
+            infectionDate.setEnabled(true);
+        }
+
+        // If User click/select No Btn
+        // ... Disable infection date
+
+        else {
+            
+            infectionDate.setEnabled(false);
+        }
+
+        // If User click Diff IStats Btn as Health Records
+        // ... Disable vaccination fields
+
+        if (!fileIStats.equals(pageIStats)) {
             
             vStatsYesBtn.setEnabled(false);
             
             vStatsNoBtn.setEnabled(false);
-        } 
-        
-        // Disable Infection-Date
-        else if (state == ItemEvent.DESELECTED) {
             
-            infectionDate.setEnabled(false);
+            vaccinationDate.setEnabled(false);
+        }
+
+        // If User click Same IStats Btn as Health Records
+        // ... Enable vaccination fields
+
+        else {
             
             vStatsYesBtn.setEnabled(true);
             
             vStatsNoBtn.setEnabled(true);
             
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+            String strVaccinationDate = sdf.format(vaccinationDate.getDate());
+            
+            if (!strVaccinationDate.equals("01/01/0001")) {
+                
+                vaccinationDate.setEnabled(true);
+            }
+        }   
+        
+        // Populate Infection Date on Toggling IStats Btn
+        // ... With infection date if any. Else today date
+                
+        String strInfectionDate = model.getValueAt(i,6).toString();
+
+        if (pageIStats.equals("Y")) {
+
+            if (fileIStats.equals("Y")) {
+                
+                try {
+
+                    java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(strInfectionDate);
+
+                    infectionDate.setDate(date);  
+                } 
+
+                catch (ParseException ex) {
+
+                    Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+                }     
+            }
+            
+            else {
+
+                try {
+                    
+                    // set today date... 
+                    
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                    LocalDate localDate = LocalDate.now();
+                    
+                    java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dtf.format(localDate));
+
+                    infectionDate.setDate(date);  
+                } 
+
+                catch (ParseException ex) {
+
+                    Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
+                }     
+            }
+        }
+
+        else { // if (pageIStats.equals("N")) { 
+
             try {
+
                 java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/0001");
+
                 infectionDate.setDate(date);  
             } 
+
             catch (ParseException ex) {
+
                 Logger.getLogger(HealthStaffPage.class.getName()).log(Level.SEVERE, null, ex);
-            }        
+            } 
         }
     }//GEN-LAST:event_iStatsYesBtnItemStateChanged
 
