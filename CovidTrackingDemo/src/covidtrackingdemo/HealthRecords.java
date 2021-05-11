@@ -64,7 +64,7 @@ public class HealthRecords {
 //    }
    
     // Select - individual
-    public User select(String username) throws IOException {
+    public PublicUser select(String username) throws IOException {
         
         try (BufferedReader csvReader = new BufferedReader(new FileReader(path))) {
             

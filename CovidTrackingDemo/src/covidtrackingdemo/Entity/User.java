@@ -41,14 +41,15 @@ public class User {
                 
         UserProfiles db = new UserProfiles();
         
-        User user = db.select(username, password);
+        User user = db.select(username);
         
-        if (user == null) { 
-            return ""; 
+        if (password.equals(user.getPassword())) {
+        
+            return user.getPrivilege();
         }
-        else { 
-            return user.getPrivilege(); 
-        }
+        
+         
+        return ""; 
     }
     
     // public String toString() {}

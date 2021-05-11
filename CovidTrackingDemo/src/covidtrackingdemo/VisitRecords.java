@@ -7,8 +7,10 @@ package covidtrackingdemo;
 
 import covidtrackingdemo.Entity.Visit;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,7 +27,19 @@ public class VisitRecords {
         path = "dataset\\VisitRecords.csv";
     }
     
-    public void insert() {}
+    public void insert(String businessOwner, String publicUser, String date) throws IOException {
+    
+        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path, true))) {
+            
+            String row = businessOwner + "," + publicUser + "," + date;
+            
+            csvWriter.newLine();
+            
+            csvWriter.write(row);
+            
+            csvWriter.close();
+        }
+    }
     
     public ArrayList<Visit> select() throws FileNotFoundException, IOException {
     

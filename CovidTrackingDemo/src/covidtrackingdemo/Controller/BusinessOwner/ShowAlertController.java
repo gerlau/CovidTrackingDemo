@@ -21,22 +21,24 @@ public class ShowAlertController {
     
     public ShowAlertController() {}
     
-    public ArrayList<String> showAlert(String accName) throws IOException {
-                
-        ArrayList<String> exposedDates = new ArrayList<>();
-        
+    public ArrayList<Alert> showAlert(String accName) throws IOException {
+                        
         Alert alert = new Alert();
         
         ArrayList<Alert> alertList = alert.showAlert();
         
-        for (Alert a : alertList) {
-            
-            if (accName.equals(a.getUsername())) {
-                
-                exposedDates.add(a.getAlertDate());
-            }            
-        }
+        Iterator itr = alertList.iterator();
         
-        return exposedDates;
+        while (itr.hasNext()) {
+            
+            Alert a = (Alert) itr.next();
+            
+            if (!accName.equals(a.getUsername())) {
+                
+                itr.remove();
+            }           
+        }
+   
+        return alertList;
     }
 }

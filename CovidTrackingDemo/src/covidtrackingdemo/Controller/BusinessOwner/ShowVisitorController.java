@@ -17,11 +17,11 @@ import java.util.Iterator;
  *
  * @author User
  */
-public class DisplayController {
+public class ShowVisitorController {
     
-    public DisplayController() {}
+    public ShowVisitorController() {}
     
-    public ArrayList<Visit> display(java.util.Date date) throws IOException, ParseException {
+    public ArrayList<Visit> showVisitor(java.util.Date date, String currentUser) throws IOException, ParseException {
         
         Visit visit = new Visit();
         ArrayList<Visit> visitorList = visit.display();
@@ -33,8 +33,9 @@ public class DisplayController {
             Visit v = (Visit) itr.next();
             
             Date visitDate = new SimpleDateFormat("dd/MM/yyyy").parse(v.getVisitedDate());
-            
-            if (!visitDate.equals(date)) {
+            String username = v.getBusinessOwner();
+                                
+            if (!(date.equals(visitDate) && currentUser.equals(username))) {
                 
                 itr.remove();
             }            

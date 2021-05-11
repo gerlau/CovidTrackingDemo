@@ -127,6 +127,7 @@ public class LoginPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Valid credentials. Public user");
                     PublicUserPage publicUser = new PublicUserPage();
                     publicUser.setVisible(true);
+                    publicUser.setUsername(username.getText());
                 }
                 case "Business Owner" -> {
                     JOptionPane.showMessageDialog(this, "Valid credentials. Business owner");
@@ -149,6 +150,8 @@ public class LoginPage extends javax.swing.JFrame {
             password.setText("");
                     
         } catch (IOException ex) {
+            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_login
