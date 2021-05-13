@@ -43,13 +43,18 @@ public class User {
         
         User user = db.select(username);
         
-        if (password.equals(user.getPassword())) {
-        
-            return user.getPrivilege();
+        if (user == null) {
+            
+            return "";
         }
+        else if (!password.equals(user.getPassword())) {
         
-         
-        return ""; 
+            return "";
+        }
+        else {
+            
+            return user.getPrivilege();
+        }         
     }
     
     // public String toString() {}
