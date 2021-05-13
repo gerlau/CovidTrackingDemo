@@ -558,7 +558,7 @@ public class PublicUserPage extends javax.swing.JFrame {
          
         for (Alert a : alist) {
             
-            model.addElement(a.getAlertType() + " alert : " + a.getAlertDate());
+            model.addElement(a.getAlertType() + " alert sent on " + a.getAlertDate());
         }
          
         alertList.setModel(model);

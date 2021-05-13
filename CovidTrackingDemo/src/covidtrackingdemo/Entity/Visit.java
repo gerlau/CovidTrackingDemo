@@ -7,6 +7,8 @@ package covidtrackingdemo.Entity;
 
 import covidtrackingdemo.VisitRecords;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,19 +62,32 @@ public class Visit {
         return vr.select();
     } 
     
-    public Set<String> findExposed(ArrayList<String> infectedList, String currentDate) throws IOException {
+    public Set<String> findExposed(ArrayList<String> infectedList, LocalDate startDate) throws IOException {
         
         Set<String> exposedList = new HashSet<>();
         
         VisitRecords vr = new VisitRecords();
         ArrayList<Visit> visitorList = vr.select();
         
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateOfVisit;
+        Boolean startofIP;
+        Boolean duringIP;
+        Boolean endofIP;
+        Boolean infectionPeriod;
+        
         for (Visit visit : visitorList) {
             
-            String visitor = visit.getPublicUser();
-            String dateOfVisit = visit.getVisitedDate();
+            String visitor = visit.getPublicUser();  
             
-            if (infectedList.contains(visitor) && currentDate.equals(dateOfVisit)) {
+            dateOfVisit = LocalDate.parse(visit.getVisitedDate(), formatter);
+            startofIP = dateOfVisit.isEqual(startDate);
+            duringIP = dateOfVisit.isAfter(startDate);
+            endofIP = dateOfVisit.isBefore(startDate.plusDays(3)); 
+            
+            infectionPeriod = startofIP || (duringIP && endofIP);
+                        
+            if (infectedList.contains(visitor) && infectionPeriod) {
             
                 exposedList.add(visit.getBusinessOwner());
             }
@@ -82,9 +97,15 @@ public class Visit {
            
             String owner = visit.getBusinessOwner();
             String visitor = visit.getPublicUser();
-            String dateOfVisit = visit.getVisitedDate();
             
-            if ((exposedList.contains(owner) && currentDate.equals(dateOfVisit)) && !infectedList.contains(visitor)) {
+            dateOfVisit = LocalDate.parse(visit.getVisitedDate(), formatter);
+            startofIP = dateOfVisit.isEqual(startDate);
+            duringIP = dateOfVisit.isAfter(startDate);
+            endofIP = dateOfVisit.isBefore(startDate.plusDays(3));
+            
+            infectionPeriod = startofIP || (duringIP && endofIP);
+            
+            if ((exposedList.contains(owner) && infectionPeriod) && !infectedList.contains(visitor)) {
             
                 exposedList.add(visitor);
             }

@@ -11,9 +11,12 @@ import covidtrackingdemo.Entity.PublicUser;
 import covidtrackingdemo.Entity.Visit;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
-
 /**
  *
  * @author barry
@@ -25,12 +28,20 @@ public class SendExpAlertCtrler {
     public Set<String> sendExpAlert(String currentDate) throws IOException, ParseException {
         
         // HealthRecords
+        // Find out the infected cases based on the current date 
         HealthStaff hs = new HealthStaff();
         ArrayList<String> infectedList = hs.findInfected(currentDate);
         
         // Vists
+        // Find about the exposed cases based on the current date - 2
+        // Up to 2 branches only 
+        // e.g., Public User -> Business Owner -> Public User
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate startDate = LocalDate.parse(currentDate, formatter);
+        startDate = startDate.minusDays(2);
+        
         Visit vist = new Visit();
-        Set<String> exposedList = vist.findExposed(infectedList, currentDate);
+        Set<String> exposedList = vist.findExposed(infectedList, startDate);
         
         // Alerts
         Alert alert = new Alert();
