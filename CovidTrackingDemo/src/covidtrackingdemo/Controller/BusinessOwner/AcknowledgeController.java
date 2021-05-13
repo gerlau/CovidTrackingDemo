@@ -25,7 +25,7 @@ public class AcknowledgeController {
         
             String[] data = sel.split(" ");
             
-            alert.acknowledge(data[0], data[1], data[4]);
+            alert.acknowledge(data[0], data[1], data[5]);
         }
     }
 }

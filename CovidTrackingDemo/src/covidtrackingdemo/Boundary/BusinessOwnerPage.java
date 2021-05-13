@@ -349,7 +349,7 @@ public class BusinessOwnerPage extends javax.swing.JFrame {
          
         for (Alert a : aList) {
             
-            model.addElement(a.getAlertType() + " alert : " + a.getAlertDate());
+            model.addElement(a.getAlertType() + " alert sent on " + a.getAlertDate());
         }
          
         alertList.setModel(model);
